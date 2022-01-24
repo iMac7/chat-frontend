@@ -1,15 +1,15 @@
 import React from 'react'
-import Sidenav from './Sidenav'
-import Home from './Home'
-import Trends from './Trends'
+import Sidenav from './Sidenav/Sidenav'
+import Home from './Home/Home'
+import Trends from './Trends/Trends'
 import './homepage.css'
 
 function Homepage() {
     return (
         <div className="app">
-        <Sidenav className='appComponent sidenav'/>
+        <Sidenav className='appComponent sideNav'/>
         <Home className='appComponent home'/>
-        {/* <Trends className='appComponent trends'/> */}
+        <Trends className='appComponent trends'/>
         </div>
     )
 }

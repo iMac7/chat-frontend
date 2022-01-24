@@ -1,0 +1,16 @@
+#search {
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+
+#searchInput {
+    border: none;
+}
+
+#searchInput:focus {
+    border: none;
+    outline: none;
+}
