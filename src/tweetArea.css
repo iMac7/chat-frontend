@@ -1,0 +1,14 @@
+#tweetBox {
+    display: flex;
+}
+
+#tweetForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#tweetInput {}
+
+#tweetInput:focus {
+    outline: none;
+}
