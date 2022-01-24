@@ -7,8 +7,8 @@ function Homepage() {
     return (
         <>
         <Sidenav/>
-        <Home/>
-        <Trends/>
+        {/* <Home/>
+        <Trends/> */}
         </>
     )
 }
