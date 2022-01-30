@@ -3,6 +3,9 @@ import React, {useState} from 'react'
 function SignUp() {
 
     const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
 
     const handleClick =(e)=>{
         e.preventDefault()
@@ -13,10 +16,12 @@ function SignUp() {
             'Content-Type' : 'application/json'
           },
           body:JSON.stringify(
-            {name:userName}
+            {name:userName, email:email, password: password}
           )
         })
         setUserName('')
+        setEmail('')
+        setPassword('')
        }
 
     return (
@@ -27,8 +32,16 @@ function SignUp() {
             value={userName}
             onChange={e=> setUserName(e.target.value)}/>
 
+            <label htmlFor="email">Email</label>
+            <input type="email" name='email' id='email'
+            value={email}
+            onChange={e=> setEmail(e.target.value)}/>
+
             <label htmlFor="password">Password</label>
-            <input type="text" name='password' id='password'/>
+            <input type="password" name='password' id='password'
+            value={password}
+            onChange={e=> setPassword(e.target.value)}/>
+
 
             <button onClick={handleClick}>Sign In</button>
 
