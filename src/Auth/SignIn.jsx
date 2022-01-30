@@ -1,34 +1,47 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router-dom'
 
 function SignIn() {
 
-    const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const history = useHistory()
+
 
     const handleClick =(e)=>{
         e.preventDefault()
 
-        fetch("http://localhost:3001/",{
+        fetch("http://localhost:3001/signIn",{
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json'
           },
           body:JSON.stringify(
-            {name:userName}
+            {email:email, password:password}
           )
         })
-        setUserName('')
+        .then(res=> {return res.json()})
+        .then(parsedData => {
+          console.log(parsedData)
+          // history.push('/')
+        })
+        
+    
        }
 
     return (
-        <form action="/signIn">
+        <form>
             <h1>Log In</h1>
-            <label htmlFor="userName">Username</label>
+
+            <label htmlFor="email">email</label>
             <input type="text" name='text' id='text'
-            value={userName}
-            onChange={e=> setUserName(e.target.value)}/>
+            value={email}
+            onChange={e=> setEmail(e.target.value)}/>
 
             <label htmlFor="password">Password</label>
-            <input type="text" name='password' id='password'/>
+            <input type="text" name='password' id='password'
+            value={password}
+            onChange={e=> setPassword(e.target.value)}/>
 
             <button onClick={handleClick}>Sign In</button>
 

@@ -4,6 +4,12 @@
     width: 30%;
 }
 
+#signUpForm {
+    background-color: rgb(199, 199, 199);
+}
+
 #signUpFormInput {
     width: 40%;
 }
+
+#signUpButton {}

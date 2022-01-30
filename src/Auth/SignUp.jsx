@@ -1,36 +1,44 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router-dom'
+import './signUp.css'
+import { Button } from '@mui/material'
+
 
 function SignUp() {
 
-    const [userName, setUserName] = useState("")
+    // const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const history = useHistory()
 
     const handleClick =(e)=>{
         e.preventDefault()
 
-        fetch("http://localhost:3001/",{
+        fetch("http://localhost:3001/signUp",{
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json'
           },
           body:JSON.stringify(
-            {name:userName, email:email, password: password}
+            { email:email, password: password}
           )
-        })
-        setUserName('')
-        setEmail('')
-        setPassword('')
-       }
+        }).then(resJson =>{
+            return resJson.json()
+            // history.push('/signIn')
+        }).then(res=> {if(res.userid){
+            return history.push('/')
+        }})
+    
 
+    }
     return (
-        <form action="/signIn">
+        <form id='signUpForm'>
             <h1>SignUp</h1>
-            <label htmlFor="userName">Username</label>
+            {/* <label htmlFor="userName">Username</label>
             <input type="text" name='text' id='text'
-            value={userName}
-            onChange={e=> setUserName(e.target.value)}/>
+            value={username}
+            onChange={e=> setUsername(e.target.value)}/> */}
 
             <label htmlFor="email">Email</label>
             <input type="email" name='email' id='email'
@@ -43,7 +51,7 @@ function SignUp() {
             onChange={e=> setPassword(e.target.value)}/>
 
 
-            <button onClick={handleClick}>Sign In</button>
+            <Button onClick={handleClick} id='signUpButton'>Sign Up</Button>
 
         </form>
     )
