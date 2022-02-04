@@ -1,45 +1,42 @@
 import './homepage.css'
-import React from 'react'
+import React, {useContext} from 'react'
 import Sidenav from './Sidenav/Sidenav'
 import Home from './Home/Home'
 import Trends from './Trends/Trends'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
 import Error from './Error'
-import {BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import RequireAuth from './Auth/RequireAuth'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function Homepage() {
+
     return (
-        <>
-        <Router>
-            <Switch>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/signUp' element={<SignUp/>}/>
 
-                <Route exact path='/signUp'>
-                    <SignUp/>
-                    <Link to='/signIn'>Sign In</Link>
-                </Route>
+                    <Route path='/signIn'element={<SignIn/>}/>
 
-                <Route exact path='/signIn'>
-                    <SignIn/>
-                    <Link to='/signUp'>Sign Up</Link>
+                    <Route element={<RequireAuth/>} >
+                        <Route path='/' element={
+                            <div className="app">
+                                <Sidenav className='appComponent sideNav'/>
+                                <Home className='appComponent home'/>
+                                <Trends className='appComponent trends'/>
+                            </div>
+                        }/>
+                        <Route path='/protected' element={
+                            <div className='protected'>
+                            <h1>protected</h1>
+                            </div>
+                        }/>
+                        <Route path='*' element={<Error/>} />
+                        
+                    </Route>
 
-                </Route>
-
-                <Route exact path='/'>
-                    <div className="app">
-                        <Sidenav className='appComponent sideNav'/>
-                        <Home className='appComponent home'/>
-                        <Trends className='appComponent trends'/>
-                    </div>
-                </Route>
-
-                <Route path='*'>
-                    <Error/>
-                </Route>
-
-            </Switch>
-        </Router>    
-        </>
+                </Routes>
+            </BrowserRouter>             
     )
 }
 

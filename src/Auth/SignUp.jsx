@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import { useHistory } from 'react-router-dom'
 import './signUp.css'
 import { Button } from '@mui/material'
+import {Link} from 'react-router-dom'
 
 
 function SignUp() {
@@ -10,7 +10,6 @@ function SignUp() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const history = useHistory()
 
     const handleClick =(e)=>{
         e.preventDefault()
@@ -26,9 +25,10 @@ function SignUp() {
         }).then(resJson =>{
             return resJson.json()
             // history.push('/signIn')
-        }).then(res=> {if(res.userid){
-            return history.push('/')
-        }})
+        // }).then(res=> {if(res.userid){
+        //     return history.push('/')
+        // }
+    })
     
 
     }
@@ -52,6 +52,7 @@ function SignUp() {
 
 
             <Button onClick={handleClick} id='signUpButton'>Sign Up</Button>
+            <Link to='/signIn'>Sign In</Link>
 
         </form>
     )
