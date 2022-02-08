@@ -3,9 +3,12 @@ import './trendsForYou.css'
 
 function TrendsForYou() {
     return (
+        <>
+        <br />
         <div>
             trends for you
         </div>
+        </>
     )
 }
 

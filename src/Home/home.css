@@ -1,5 +1,24 @@
 #home {
     border: 1px solid gray;
     width: 50%;
-    padding: 20px;
+}
+
+.topNav {
+    /* position: absolute; */
+    width: inherit;
+    position: absolute;
+    backdrop-filter: blur(18px) saturate(0%);
+    -webkit-backdrop-filter: blur(13px) saturate(0%);
+    background-color: rgba(255, 255, 255, 0.63);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.bottomNav {
+    height: 97vh;
+    padding: 5rem 1rem;
+    overflow-y: scroll;
+}
+
+.bottomNav::-webkit-scrollbar {
+    display: none;
 }

@@ -1,8 +1,25 @@
-.tweets {
+/* .tweets {
     display: flex;
-    border-top: 1px solid gray;
-    padding-top: 10px;
+    height: 97vh;
+} */
+
+.tweets::-webkit-scrollbar {
+    /* width: .5rem; */
+    display: none;
 }
+
+
+/* .tweets::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 100vw;
+    margin-block: .4rem;
+}
+
+.tweets::-webkit-scrollbar-thumb {
+    background: rgb(177, 177, 177);
+    border-radius: 100vw;
+    border: 1px solid white;
+} */
 
 .tweetContent {
     display: flex;

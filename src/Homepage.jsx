@@ -1,5 +1,6 @@
-import './homepage.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import React, {useContext} from 'react'
+import './homepage.css'
 import Sidenav from './Sidenav/Sidenav'
 import Home from './Home/Home'
 import Trends from './Trends/Trends'
@@ -7,33 +8,32 @@ import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
 import Error from './Error'
 import RequireAuth from './Auth/RequireAuth'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function Homepage() {
 
     return (
             <BrowserRouter>
                 <Routes>
-                    <Route path='/signUp' element={<SignUp/>}/>
-
+                    <Route path='/signUp' element={<SignUp/>} />    
                     <Route path='/signIn'element={<SignIn/>}/>
 
-                    <Route element={<RequireAuth/>} >
-                        <Route path='/' element={
+                    <Route path='/' element={
                             <div className="app">
                                 <Sidenav className='appComponent sideNav'/>
                                 <Home className='appComponent home'/>
                                 <Trends className='appComponent trends'/>
                             </div>
                         }/>
-                        <Route path='/protected' element={
+
+                    <Route element={<RequireAuth/>}>
+                    <Route path='/protected' element={
                             <div className='protected'>
                             <h1>protected</h1>
                             </div>
                         }/>
-                        <Route path='*' element={<Error/>} />
-                        
                     </Route>
+                    
+                    <Route path='*' element={<Error/>} />
 
                 </Routes>
             </BrowserRouter>             

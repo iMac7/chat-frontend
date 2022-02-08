@@ -1,38 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 .nav {
     width: 10%;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-around;
-    padding-bottom: 40vh;
-    padding-top: 15vh;
-    align-items: center;
     border: 1px solid gray;
+    background-color: rgb(219, 219, 219);
+    padding: 80px 0;
 }
-
-.icon {}
-
-.navItem {
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 16px;
-}
-
-.navItem:hover {
-    background-color: rgba(236, 236, 236, 0.876);
-    transition: 450ms;
-}
-
-.iconLabel {
-    padding: 15px;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.appIcon {}
 
 #tweetBtn {
     background-color: rgba(52, 140, 255, 0.876);
     color: white;
+}
+
+.navIcon {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    fill: gray;
+    margin-left: 5px;
+    /* background-color: red; */
+}
+
+.navIcon:hover {
+    /* background-color: black; */
+    fill: rgb(77, 77, 77);
+}
+
+.navLabel {
+    margin-left: 10px;
+}
+
+.navItem {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navItem:hover {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    transition: 400ms;
+}
+
+.navItem:hover:before {
+    content: '';
+    background-color: rgb(63, 63, 63);
+    height: 3.4rem;
+    position: absolute;
+    width: 5px;
+    left: 0;
 }

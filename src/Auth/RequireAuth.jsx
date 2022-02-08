@@ -4,7 +4,7 @@ import {AuthContext} from './SignIn'
 
 
 function RequireAuth() {
-    const auth = useContext(AuthContext)
+    const {auth} = useContext(AuthContext)
     const location = useLocation()
 
     return (

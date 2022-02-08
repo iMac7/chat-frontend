@@ -1,13 +1,21 @@
 #tweetBox {
     display: flex;
+    box-shadow: rgba(100, 100, 100, 0.3) 2px 8px 8px;
 }
 
 #tweetForm {
     display: flex;
     flex-direction: column;
+    width: 80%;
 }
 
-#tweetInput {}
+#tweetInput {
+    height: 2rem;
+    padding: 0 5px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid gray;
+}
 
 #tweetInput:focus {
     outline: none;

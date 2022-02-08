@@ -1,16 +1,28 @@
-#search {
+.search {
     border: 1px solid gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
 }
 
-#searchInput {
+.searchBar {
+    height: 30px;
+    width: 100%;
+}
+
+.searchButton {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    float: left;
+    border: none;
+    background: white;
+}
+
+.searchInput {
+    height: 100%;
+    width: 100%;
+    padding: 10px 10px 10px 40px;
     border: none;
 }
 
-#searchInput:focus {
-    border: none;
-    outline: none;
+.searchButtonIcon {
+    fill: gray;
 }

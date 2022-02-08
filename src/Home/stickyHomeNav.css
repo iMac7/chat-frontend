@@ -1,4 +1,8 @@
 #stickyHomeNav {
+    height: 2rem;
+    color: rgb(0, 0, 0);
     display: flex;
-    background-color: gray;
+    justify-content: space-between;
+    padding: .5rem;
+    margin-bottom: 1.5rem;
 }

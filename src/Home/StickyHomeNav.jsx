@@ -4,8 +4,8 @@ import './stickyHomeNav.css'
 function StickyHomeNav() {
     return (
         <div id='stickyHomeNav'>
-            <div>Home</div>
-            <div>🔥 </div>
+            <div><strong>Home</strong></div>
+            <div>Hot 🔥</div>
         </div>
     )
 }

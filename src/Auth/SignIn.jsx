@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 export const AuthContext = React.createContext()
 
-function SignIn() {
+function SignIn(props) {
 
     let auth = false
     const [email, setEmail] = useState("")
@@ -26,18 +26,19 @@ function SignIn() {
         .then(parsedData => {
             console.log(parsedData)
             if(parsedData.email){
-                auth = true
+                auth = true 
                 console.log(auth)
             }
         }) 
        }
 
     return (
-        <AuthContext.Provider value={auth}>
+        <AuthContext.Provider value={{auth: auth, color: 'red'}}>
+            {props.children}
             <form>
                 <h1>Log In</h1>
 
-                <label htmlFor="email">email</label>
+                <label htmlFor="email" style={{color:'red'}}>email</label>
                 <input type="text" name='text' id='text'
                 value={email}
                 onChange={e=> setEmail(e.target.value)}/>
@@ -48,7 +49,9 @@ function SignIn() {
                 onChange={e=> setPassword(e.target.value)}/>
 
                 <button onClick={handleClick}>Sign In</button>
-                <Link to='/signUp'>Sign Up</Link>
+                <div><Link to='/signUp'>Sign Up</Link></div>
+                <div><Link to='/protected'>protected</Link></div>
+                
                 {console.log(auth)}
 
             </form>
