@@ -8,6 +8,7 @@ import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
 import Error from './Error'
 import RequireAuth from './Auth/RequireAuth'
+import ForgotPassword from './Auth/ForgotPassword'
 
 function Homepage() {
 
@@ -16,6 +17,7 @@ function Homepage() {
                 <Routes>
                     <Route path='/signUp' element={<SignUp/>} />    
                     <Route path='/signIn'element={<SignIn/>}/>
+                    <Route path='/forgotPassword'element={<ForgotPassword/>}/>
 
                     <Route path='/' element={
                             <div className="app">

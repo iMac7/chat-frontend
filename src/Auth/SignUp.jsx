@@ -1,14 +1,24 @@
-import React, {useState} from 'react'
-import './signUp.css'
+import React, {useState, useEffect} from 'react'
+import './signUp.css' 
 import { Button } from '@mui/material'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 
 function SignUp() {
-
-    // const [username, setUsername] = useState("")
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
+    useEffect(() => {
+        if(localStorage.getItem('authToken')){
+            console.log(localStorage.getItem('authToken'));
+            navigate('/signIn')
+        }
+        return () => {
+            
+        }
+    }, [navigate])
 
 
     const handleClick =(e)=>{
@@ -32,29 +42,49 @@ function SignUp() {
     
 
     }
+
     return (
-        <form id='signUpForm'>
-            <h1>SignUp</h1>
-            {/* <label htmlFor="userName">Username</label>
-            <input type="text" name='text' id='text'
-            value={username}
-            onChange={e=> setUsername(e.target.value)}/> */}
+        <section className="signIn">
+            <form className='signInForm'>
+                <h1 className='formElement'>Sign Up</h1>
+                {/* <label htmlFor="userName">Username</label>
+                <input type="text" name='text' id='text'
+                value={username}
+                onChange={e=> setUsername(e.target.value)}/> */}
 
-            <label htmlFor="email">Email</label>
-            <input type="email" name='email' id='email'
-            value={email}
-            onChange={e=> setEmail(e.target.value)}/>
+                <div className="formElement">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name='email' id='signInFormInput'
+                    value={email}
+                    onChange={e=> setEmail(e.target.value)}/>
+                </div>
 
-            <label htmlFor="password">Password</label>
-            <input type="password" name='password' id='password'
-            value={password}
-            onChange={e=> setPassword(e.target.value)}/>
+                <div className="formElement">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name='password' id='signInFormInput'
+                    value={password}
+                    onChange={e=> setPassword(e.target.value)}/>
+                </div>
 
+                <div className="formElement">
+                    <label htmlFor="password">Confirm Password</label>
+                    <input type="password" name='password' id='signInFormInput'
+                    value={confirmPassword}
+                    onChange={e=> setConfirmPassword(e.target.value)}/>
+                </div>
 
-            <Button onClick={handleClick} id='signUpButton'>Sign Up</Button>
-            <Link to='/signIn'>Sign In</Link>
+                <div className="formElement">
+                    <Button onClick={handleClick} id='signUpButton'>Sign Up</Button>
+                </div>
 
-        </form>
+                <div className="formElement">
+                    <Link to='/signIn'>Sign In</Link>
+                    <Link to='/forgotPassword'>Forgot Password?</Link>
+                </div>
+                
+                
+            </form>
+        </section>
     )
 }
 

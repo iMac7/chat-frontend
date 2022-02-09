@@ -1,12 +1,21 @@
-import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 export const AuthContext = React.createContext()
+import('./signIn.css')
 
 function SignIn(props) {
 
+    const navigate = useNavigate()
     let auth = false
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(() => {
+        if(localStorage.getItem('authToken')){
+            console.log(localStorage.getItem('authToken'));
+            navigate('/')
+        }
+    }, [navigate])
 
 
     const handleClick =(e)=>{
@@ -15,8 +24,9 @@ function SignIn(props) {
         fetch("http://localhost:3001/signIn",{
             method: 'POST',
             headers : {
-            'Content-Type' : 'application/json'
-          },
+            'Content-Type' : 'application/json',
+            Authorization : localStorage.getItem('authToken')
+        },
           credentials: 'include',
           body:JSON.stringify(
             {email:email, password:password}
@@ -24,37 +34,48 @@ function SignIn(props) {
         })
         .then(res=> {return res.json()})
         .then(parsedData => {
-            console.log(parsedData)
-            if(parsedData.email){
-                auth = true 
-                console.log(auth)
-            }
+            localStorage.setItem('authToken', parsedData.token)
         }) 
        }
+
 
     return (
         <AuthContext.Provider value={{auth: auth, color: 'red'}}>
             {props.children}
-            <form>
-                <h1>Log In</h1>
+            <section className="signIn">
+                <form className='signInForm'>
 
-                <label htmlFor="email" style={{color:'red'}}>email</label>
-                <input type="text" name='text' id='text'
-                value={email}
-                onChange={e=> setEmail(e.target.value)}/>
+                    <div className="formElement">
+                        <h1>Log In</h1>
+                    </div>
 
-                <label htmlFor="password">Password</label>
-                <input type="text" name='password' id='password'
-                value={password}
-                onChange={e=> setPassword(e.target.value)}/>
+                    <div className="formElement">
+                    <label htmlFor="email" >EMAIL</label>
+                    <input type="text" name='text' id='signInFormInput'
+                    value={email}
+                    onChange={e=> setEmail(e.target.value)}/>
+                    </div>
 
-                <button onClick={handleClick}>Sign In</button>
-                <div><Link to='/signUp'>Sign Up</Link></div>
-                <div><Link to='/protected'>protected</Link></div>
-                
-                {console.log(auth)}
+                    <div className="formElement">
+                        <label htmlFor="password">PASSWORD</label>
+                        <input type="text" name='password' id='signInFormInput'
+                        value={password}
+                        onChange={e=> setPassword(e.target.value)}/>
+                    </div>
 
-            </form>
+                    <div className="formElement">
+                        <button onClick={handleClick}>Sign In</button>
+                    </div>              
+
+                    <div className="formElement">
+                        <Link to='/signUp'>Sign Up</Link>
+                        <Link to='/forgotPassword'>Forgot Password?</Link>
+                    </div>
+                    
+                    {console.log(auth)}
+
+                </form>
+            </section>
         </AuthContext.Provider>
     )
 }
