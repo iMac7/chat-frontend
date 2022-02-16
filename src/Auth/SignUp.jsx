@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import './signUp.css' 
-import { Button } from '@mui/material'
 import {Link, useNavigate} from 'react-router-dom'
 
 
@@ -74,7 +73,7 @@ function SignUp() {
                 </div>
 
                 <div className="formElement">
-                    <Button onClick={handleClick} id='signUpButton'>Sign Up</Button>
+                    <button onClick={handleClick} id='signUpButton'>Sign Up</button>
                 </div>
 
                 <div className="formElement">

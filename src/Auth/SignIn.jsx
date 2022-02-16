@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
-export const AuthContext = React.createContext()
+
 import('./signIn.css')
 
 function SignIn(props) {
@@ -40,8 +40,6 @@ function SignIn(props) {
 
 
     return (
-        <AuthContext.Provider value={{auth: auth, color: 'red'}}>
-            {props.children}
             <section className="signIn">
                 <form className='signInForm'>
 
@@ -76,7 +74,6 @@ function SignIn(props) {
 
                 </form>
             </section>
-        </AuthContext.Provider>
     )
 }
 

@@ -5,8 +5,10 @@ function TrendsForYou() {
     return (
         <>
         <br />
+        
+        <img src="../../assets/" alt="" />
         <div>
-            trends for you
+            trends
         </div>
         </>
     )

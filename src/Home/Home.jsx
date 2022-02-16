@@ -1,30 +1,27 @@
-import React, {useState, createContext} from 'react'
+import React, {useState, useContext} from 'react'
+
 import TweetArea from './TweetArea'
-import Tweets from './Tweets'
+import Tweets from './Tweets.jsx'
 import StickyHomeNav from './StickyHomeNav'
 import './home.css'
-export const colorContext = React.createContext()
+import { AuthContext } from '../Homepage'
+
 
 function Home() {
-    const [color, setColor] = useState('red')
+    const auth = useContext(AuthContext)
 
     return (
-        <colorContext.Provider value={color}>
-            <article id='home'>
+            <article className='home'>
                 <div className="topNav">
                     <StickyHomeNav/>
-                    <TweetArea/>
                 </div>
                 <div className='bottomNav'>
+                    <TweetArea/>
                     <br />
                     <Tweets/>
-                    <button style={{backgroundColor:color}}
-                    onClick={()=>{color === 'red'?
-                    setColor('blue') : setColor('red')}}
-                    >color</button>
+                    {console.log(auth)}
                 </div>
             </article>
-        </colorContext.Provider>
     )
 }
 

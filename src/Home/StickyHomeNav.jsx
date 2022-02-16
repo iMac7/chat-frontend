@@ -5,7 +5,6 @@ function StickyHomeNav() {
     return (
         <div id='stickyHomeNav'>
             <div><strong>Home</strong></div>
-            <div>Hot 🔥</div>
         </div>
     )
 }

@@ -1,18 +1,34 @@
-import { Avatar } from '@mui/material'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './tweets.css'
 
 function Tweets() {
+    const [posts, setPosts] = useState()
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        try {
+            fetch("http://localhost:3001/publicposts")
+            .then(res =>{
+                if(!res.ok){throw new Error(res.message)}
+                else{return res.json()}
+                })
+            .then(data =>{setPosts(data)})    
+            
+            setIsLoading(false)
+            
+
+        } catch (error) {
+            console.log(error);
+        }
+        }, []) 
+
     return (
         <>
-            <br />
-            <Avatar/>
-            <div className="tweetContent">
-                <div className="@"> ESPN</div>
-                <div id="tweetContent">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil rerum harum natus beatae. Suscipit impedit rem molestiae quas debitis consequatur vel dolorem itaque facilis. Adipisci esse veritatis at, impedit ex quibusdam doloribus reprehenderit cumque consectetur tenetur sit ipsam iste corrupti aperiam, voluptate maiores excepturi eaque nam repellat incidunt rem recusandae nobis enim. Laudantium quo fugit doloremque nulla quasi quidem iusto hic sunt architecto, ex, est amet ipsa provident nesciunt inventore quaerat dignissimos enim accusamus voluptatibus. Eius architecto doloribus aliquid qui at. Quia error nobis minima repellat ducimus inventore vero exercitationem aut. Doloremque ducimus quis voluptates perferendis eligendi neque incidunt eius in sit! Natus impedit tempora consequuntur harum asperiores ipsam! Quasi commodi, culpa provident sapiente illo porro velit et earum vero delectus repellendus ducimus amet iste asperiores deserunt nihil impedit, ipsum harum maiores ab. Inventore ab perspiciatis aliquid cupiditate iusto delectus nihil, obcaecati a perferendis, cumque quis, necessitatibus ducimus commodi ipsum laudantium officia nisi unde doloremque facere id exercitationem corporis? Laboriosam a eius eaque illum quaerat molestias at facilis labore odit omnis delectus, fugiat ipsam suscipit! Modi nam optio cum error labore tempora quasi ex! Vero ducimus minus voluptate nisi, omnis, quos dignissimos eaque natus voluptatibus, cupiditate minima iusto. Cupiditate quibusdam tempora, quia inventore id, minus libero aspernatur dicta, nulla consectetur fugit nisi officiis neque odio fuga soluta? Sequi amet maiores alias doloremque dolores ducimus porro, qui repudiandae laudantium excepturi omnis non sed eum debitis ipsa, provident impedit quo voluptatem corporis quaerat architecto. Aliquid accusantium aliquam ab ipsum quisquam nihil neque, debitis, quam ratione distinctio consectetur eligendi beatae laboriosam impedit perferendis natus, unde officia ea ipsam sapiente ipsa? Voluptatum architecto optio quod, ex nesciunt quae molestias cum veritatis quisquam deserunt rem, minus obcaecati nemo facilis corrupti quis similique accusamus quos quia veniam, voluptates expedita. Laborum vero velit id consequuntur placeat quo, ut officiis ipsa adipisci optio laudantium praesentium qui aspernatur, ipsam labore impedit minus voluptas voluptate ab. Vitae explicabo quasi corporis labore aliquam, eaque, distinctio ducimus animi, nostrum debitis et consequatur modi reiciendis! Libero facere veniam veritatis totam! Animi, consequuntur ipsa optio exercitationem hic dolore doloremque tempora odio laborum minus deleniti harum incidunt quos ullam inventore, veniam in odit repellat iste aperiam vel nihil voluptatem? Quidem amet perspiciatis cum, quam delectus quis expedita beatae illum asperiores voluptatum ut tempora ducimus architecto, deleniti corporis veritatis repudiandae harum sed necessitatibus dolore reprehenderit accusamus labore neque quas! Consectetur facilis nostrum similique vero, optio sapiente eos pariatur incidunt esse temporibus velit accusantium, debitis illum ipsam officia ullam praesentium nulla, provident laboriosam autem dignissimos. Dolorum soluta animi ipsa, et enim deserunt modi molestiae veniam, aperiam aspernatur tempora laboriosam ad! Voluptates quidem esse veniam doloremque quia praesentium voluptatum pariatur deserunt sequi repudiandae quaerat officiis accusamus debitis, minus labore excepturi vitae? Perspiciatis qui repellat quaerat! Vitae rerum tenetur ipsa consequuntur itaque necessitatibus, id accusamus distinctio totam quisquam vero adipisci culpa nobis porro esse aut maiores error minima dolor, facere consectetur commodi animi. A modi possimus laborum natus omnis, nesciunt ducimus fuga alias iste officiis similique itaque pariatur ratione.
-                </div>
-            </div>
+        { 
+            !isLoading&&
+            posts&&
+            posts.map(post => <div key={post._id}>{post.content}</div> )      
+        }
         </>
     )
 }

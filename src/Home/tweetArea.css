@@ -1,6 +1,8 @@
-#tweetBox {
+.tweetBox {
+    width: 100%;
+    padding: 1rem;
     display: flex;
-    box-shadow: rgba(100, 100, 100, 0.3) 2px 8px 8px;
+    border-bottom: 1px solid gray;
 }
 
 #tweetForm {
@@ -9,14 +11,60 @@
     width: 80%;
 }
 
-#tweetInput {
-    height: 2rem;
-    padding: 0 5px;
+.leftTweetNav,
+.rightTweetNav,
+.rightLowerTweetNav {}
+
+.rightTweetNav {
+    width: 90%;
+}
+
+.tweetInput {
+    height: auto;
+    padding: 1rem;
     width: 100%;
     border: none;
     border-bottom: 1px solid gray;
+    overflow-x: wrap;
+    word-break: keep-all;
+    font-size: 1.2rem;
+    overflow: hidden;
 }
 
-#tweetInput:focus {
+.tweetInput:focus {
     outline: none;
+}
+
+.dp {
+    background-image: url('./starry_sky.jpg');
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.rightLowerTweetNav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.uploadIcon {
+    width: 25px;
+    height: 25px;
+}
+
+#tweetBtn {
+    border: none;
+    background-color: lightblue;
+    width: 4rem;
+    height: 2rem;
+    transition: 300ms;
+}
+
+#tweetBtn:hover {
+    background-color: rgb(93, 93, 255);
+    color: rgb(235, 235, 235);
+}
+
+#tweetBtn:active {
+    background-color: rgb(211, 248, 255);
 }

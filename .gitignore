@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/Home/starry_sky.jpg
 
 # testing
 /coverage

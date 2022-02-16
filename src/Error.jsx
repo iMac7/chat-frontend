@@ -1,16 +1,16 @@
-import React, {useContext} from 'react'
-import { AuthContext } from './Auth/SignIn'
+// import React, {useContext} from 'react'
+// import { AuthContext } from './Auth/SignIn'
 
 
 
-function Error() {
-    const {color} = useContext(AuthContext)
+// function Error() {
+//     const {color} = useContext(AuthContext)
 
-    return (
-        <div>
-            Error 404 Page not found
-        </div>
-    )
-}
+//     return (
+//         <div>
+//             Error 404 Page not found
+//         </div>
+//     )
+// }
 
-export default Error
+// export default Error
