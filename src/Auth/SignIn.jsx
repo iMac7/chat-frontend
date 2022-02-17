@@ -25,7 +25,7 @@ function SignIn(props) {
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json',
-            Authorization : localStorage.getItem('authToken')
+            'Authorization' : localStorage.getItem('userData')
         },
           credentials: 'include',
           body:JSON.stringify(
@@ -33,9 +33,10 @@ function SignIn(props) {
           )
         })
         .then(res=> {return res.json()})
-        .then(parsedData => {
-            localStorage.setItem('authToken', parsedData.token)
-        }) 
+        .then(user => {
+            localStorage.setItem('userData',
+             JSON.stringify({ userID: user.userID, email: user.email, token: user.token }))
+        })
        }
 
 

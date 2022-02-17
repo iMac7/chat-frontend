@@ -14,9 +14,6 @@ function SignUp() {
             console.log(localStorage.getItem('authToken'));
             navigate('/signIn')
         }
-        return () => {
-            
-        }
     }, [navigate])
 
 
@@ -31,15 +28,18 @@ function SignUp() {
           body:JSON.stringify(
             { email:email, password: password}
           )
-        }).then(resJson =>{
-            return resJson.json()
+        }).then(res =>{
+            return res.json()
             // history.push('/signIn')
         // }).then(res=> {if(res.userid){
         //     return history.push('/')
         // }
-    })
+        })
+        .then(user => {
+            localStorage.setItem('userData',
+             JSON.stringify({ userID: user.userID, email: user.email, token: user.token }))
+        })
     
-
     }
 
     return (

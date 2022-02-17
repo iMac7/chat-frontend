@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 
 import TweetArea from './TweetArea'
 import Tweets from './Tweets.jsx'
