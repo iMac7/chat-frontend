@@ -35,7 +35,7 @@ function Homepage() {
 
                         <Route path='/' element={
                                 <div className="app">
-                                    {/* <Sidenav className='appComponent sideNav'/> */}
+                                    <Sidenav className='appComponent sideNav'/>
                                     {/* <MobileNav/> */}
                                     <Home className='appComponent home'/>
                                     {/* <Trends className='appComponent trends'/> */}

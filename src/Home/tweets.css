@@ -29,13 +29,15 @@
 .postIcon {
     width: 1.5rem;
     height: 1.5rem;
-    fill: red;
+    fill: gray;
 }
 
 .postIcon:hover {
-    background-color: pink;
-    box-shadow: pink 10px 10px 10px;
-    background-clip: content-box;
+    fill: red;
+    box-shadow: -1px -1px 40px 10px pink;
+    -webkit-box-shadow: -1px -1px 40px 10px pink;
+    -moz-box-shadow: -1px -1px 40px 10px pink;
+    background: radial-gradient(pink, rgb(255, 234, 234));
 }
 
 .postIcon:active {

@@ -15,8 +15,9 @@ function ImgUpload(props) {
            setPreviewURL(fileReader.result);
        }
        fileReader.readAsDataURL(file);
+       props.childImage(file)
 
-    }, [file])
+    }, [file,props])
 
     const filePickerRef = useRef()
 
@@ -64,7 +65,6 @@ function ImgUpload(props) {
             </div>
 
             {console.log(file)}
-            {props.childImage(file)}
             <button onClick={removeFile}>X</button>
             
 
