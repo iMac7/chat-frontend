@@ -1,0 +1,9 @@
+.upload {
+    border: 1px solid red;
+    width: 100%;
+}
+
+.previewImg {
+    width: 5rem;
+    height: 5rem;
+}
