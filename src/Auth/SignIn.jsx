@@ -10,12 +10,12 @@ function SignIn(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    useEffect(() => {
-        if(localStorage.getItem('authToken')){
-            console.log(localStorage.getItem('authToken'));
-            navigate('/')
-        }
-    }, [navigate])
+    // useEffect(() => {
+    //         if(localStorage.getItem('userData'))
+    //         // && Date.now() - JSON.parse(localStorage.getItem('userData')).createdAt < 1000*60*60*23.9){
+    //            { navigate('/')
+    //         }   
+    //     }, [])
 
 
     const handleClick =(e)=>{
@@ -35,9 +35,9 @@ function SignIn(props) {
         .then(res=> {return res.json()})
         .then(user => {
             localStorage.setItem('userData',
-             JSON.stringify({ userID: user.userID, email: user.email, token: user.token }))
+             JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt }))
         })
-       }
+    }
 
 
     return (
@@ -45,25 +45,25 @@ function SignIn(props) {
                 <form className='signInForm'>
 
                     <div className="formElement">
-                        <h1>Log In</h1>
+                        <h2>Log in</h2>
                     </div>
 
                     <div className="formElement">
                     <label htmlFor="email" >EMAIL</label>
-                    <input type="text" name='text' id='signInFormInput'
-                    value={email}
+                    <input type="text" name='text' className='signInFormInput'
+                    value={email} required
                     onChange={e=> setEmail(e.target.value)}/>
                     </div>
 
                     <div className="formElement">
                         <label htmlFor="password">PASSWORD</label>
-                        <input type="text" name='password' id='signInFormInput'
-                        value={password}
+                        <input type="text" name='password' className='signInFormInput'
+                        value={password} required
                         onChange={e=> setPassword(e.target.value)}/>
                     </div>
 
                     <div className="formElement">
-                        <button onClick={handleClick}>Sign In</button>
+                        <button className='authbtn' onClick={handleClick}>SIGN IN</button>
                     </div>              
 
                     <div className="formElement">
@@ -72,7 +72,6 @@ function SignIn(props) {
                     </div>
                     
                     {console.log(auth)}
-
                 </form>
             </section>
     )

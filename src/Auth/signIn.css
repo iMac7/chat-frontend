@@ -1,12 +1,14 @@
 .signIn {
-    height: 80vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-shrink: 1;
+    background-color: lightgray;
 }
 
 .signInForm {
+    background-color: white;
     margin-top: 10vh;
     display: flex;
     flex-direction: column;
@@ -16,6 +18,10 @@
     border: 1px solid gray;
 }
 
+div h2 {
+    text-decoration: underline;
+}
+
 .formElement {
     padding: 10px;
     display: flex;
@@ -23,8 +29,24 @@
     align-items: center;
 }
 
-#signInFormInput {
+.signInFormInput {
     height: 2rem;
-    width: 20vw;
+    width: 30vw;
     padding: 0 3px;
+}
+
+.authbtn {
+    width: 6rem;
+    height: 2rem;
+    border: 1px solid gray;
+    transition: 300ms;
+}
+
+.authbtn:hover {
+    background-color: lightblue;
+}
+
+.authbtn:active {
+    background-color: rgb(4, 0, 255);
+    color: white;
 }

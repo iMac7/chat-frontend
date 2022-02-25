@@ -1,0 +1,34 @@
+.topnav {
+    background-color: lightgray;
+    height: 3rem;
+    padding: .5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profilePic {
+    background-image: url('../../../../assets/beach.png');
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.more {
+    border: none;
+    border-radius: 50%;
+    transform: rotate(-90deg);
+    background-color: inherit;
+}
+
+.chatroomIcon {
+    fill: rgb(255, 255, 255);
+    height: 2rem;
+    width: 2rem;
+}
+
+.about {
+    background: rgba(176, 218, 233, 0.2);
+    display: flex;
+    justify-content: center;
+    word-wrap: normal;
+}

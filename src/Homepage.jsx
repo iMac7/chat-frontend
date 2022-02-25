@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import React, { createContext, useState, useCallback} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import './homepage.css'
 import Sidenav from './Sidenav/Sidenav'
@@ -11,36 +11,39 @@ import Error from './Error'
 import RequireAuth from './Auth/RequireAuth'
 import ForgotPassword from './Auth/ForgotPassword'
 import MobileNav from './Sidenav/MobileNav'
-
-export const AuthContext = createContext(
-    {
-        isLoggedIn:false,
-        login: ()=>{},
-        logout:()=>{}}
-        )
+import Chatroom from './Chatroom/Chatroom'
+import Profile from './Profile/Profile'
+import {AuthProvider, AuthContext} from './Context/AuthProvider'
 
 function Homepage() {
+    // const auth = useContext(AuthContext)
+    // let isLoggedIn = true
     
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const logIn= useCallback(()=>{}, [])
-    const logOut= useCallback(()=>{}, [])
+    // useEffect(() => {
+    //     const userdata = JSON.parse(localStorage.getItem('userData')) 
+    //     if(userdata){
+    //        isLoggedIn = true
+    //     }else{
+    //         isLoggedIn = false
+    //     }
+    // }, [])
+    
 
     return (
-        <AuthContext.Provider value={{isLoggedIn: isLoggedIn, logIn:logIn, logOut:logOut}}>
-            <BrowserRouter>
+        <BrowserRouter>
                 <Routes>
                         <Route path='/signUp' element={<SignUp/>} />    
                         <Route path='/signIn'element={<SignIn/>}/>
                         <Route path='/forgotPassword'element={<ForgotPassword/>}/>
 
                         <Route path='/' element={
-                                <div className="app">
-                                    <Sidenav className='appComponent sideNav'/>
-                                    {/* <MobileNav/> */}
-                                    <Home className='appComponent home'/>
-                                    {/* <Trends className='appComponent trends'/> */}
-                                </div>
-                            }/>
+                            <div className="app">
+                                <Sidenav className='appComponent sideNav'/>
+                                {/* <MobileNav/> */}
+                                <Home className='appComponent home'/>
+                                {/* <Trends className='appComponent trends'/> */}
+                            </div>
+                        }/>
 
                         {/* <Route element={<RequireAuth/>}/> */}
                         <Route path='/protected' element={
@@ -48,13 +51,15 @@ function Homepage() {
                                 <h1>protected</h1>
                                 </div>
                             }/>
-                        
-                        
+
+                        <Route path='/chatroom'element={<Chatroom/>}/>
+
+                        <Route path='/profile'element={<Profile/>}/>
+                       
                         {/* <Route path='*' element={<Error/>} /> */}
 
                 </Routes>
             </BrowserRouter> 
-        </AuthContext.Provider>
     )
 }
 

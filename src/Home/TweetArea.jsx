@@ -4,35 +4,21 @@ import './tweetArea.css'
 
 function TweetArea() {
 
-    const [post, setPost] = useState('')
-    const [image, setImage] = useState()
-    
-    
-    
-    // useEffect(() => {
-      //   if(image){
-        //    console.log(image);
-        //   }
-        // }, [image])
-        
-        const handleClick =(e)=>{
-          e.preventDefault()
+  const [post, setPost] = useState('')
+  const [image, setImage] = useState()
+            
+  const handleClick =(e)=>{
+    e.preventDefault()
           
-          const formdata = new FormData()
-          formdata.append('post', post)
-          formdata.append('sender', localStorage.getItem('userData'))
-          formdata.append('image', image)
-
-          console.log(image);
-
-    //   for (var value of formdata.values()) {
-    //     console.log(value);
-    //  }
+    const formdata = new FormData()
+    formdata.append('post', post)
+    formdata.append('sender', localStorage.getItem('userData'))
+    formdata.append('image', image)
     
-      fetch("http://localhost:3001/publicpost",{
+    fetch("http://localhost:3001/publicpost",{
         method: 'POST',
           body: formdata,
-      })
+    })
     }
 
 

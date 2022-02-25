@@ -50,6 +50,15 @@
 .imgUploadIcon {
     width: 25px;
     height: 25px;
+    transition: 250ms;
+}
+
+.imgUploadIcon:hover {
+    transform: scale(1.1);
+}
+
+.imgUploadIcon:active {
+    background-color: gray;
 }
 
 #tweetBtn {

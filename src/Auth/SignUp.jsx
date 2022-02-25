@@ -10,11 +10,12 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     useEffect(() => {
-        if(localStorage.getItem('authToken')){
-            console.log(localStorage.getItem('authToken'));
-            navigate('/signIn')
-        }
-    }, [navigate])
+        if(localStorage.getItem('userData'))
+        {
+            navigate('/')
+            // && Date.now() - JSON.parse(localStorage.getItem('userData')).createdAt < 1000*60*60*23.9)
+        }   
+    }, [])
 
 
     const handleClick =(e)=>{
@@ -28,52 +29,49 @@ function SignUp() {
           body:JSON.stringify(
             { email:email, password: password}
           )
-        }).then(res =>{
-            return res.json()
-            // history.push('/signIn')
-        // }).then(res=> {if(res.userid){
-        //     return history.push('/')
-        // }
         })
+        .then(res=> {return res.json()})
         .then(user => {
-            localStorage.setItem('userData',
-             JSON.stringify({ userID: user.userID, email: user.email, token: user.token }))
-        })
-    
+            if(user){
+                localStorage.setItem('userData',
+                JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt}))
+                navigate('/signIn')
+            }
+        })    
     }
 
     return (
         <section className="signIn">
             <form className='signInForm'>
-                <h1 className='formElement'>Sign Up</h1>
+                <h2 className='formElement'>Sign Up</h2>
                 {/* <label htmlFor="userName">Username</label>
                 <input type="text" name='text' id='text'
                 value={username}
                 onChange={e=> setUsername(e.target.value)}/> */}
 
                 <div className="formElement">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name='email' id='signInFormInput'
-                    value={email}
+                    <label htmlFor="email">EMAIL</label>
+                    <input type="email" name='email' className='signInFormInput'
+                    value={email} required
                     onChange={e=> setEmail(e.target.value)}/>
                 </div>
 
                 <div className="formElement">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name='password' id='signInFormInput'
-                    value={password}
+                    <label htmlFor="password">PASSWORD</label>
+                    <input type="password" name='password' className='signInFormInput'
+                    value={password} required
                     onChange={e=> setPassword(e.target.value)}/>
                 </div>
 
                 <div className="formElement">
-                    <label htmlFor="password">Confirm Password</label>
-                    <input type="password" name='password' id='signInFormInput'
-                    value={confirmPassword}
+                    <label htmlFor="password">CONFIRM PASSWORD</label>
+                    <input type="password" name='password' className='signInFormInput'
+                    value={confirmPassword} required
                     onChange={e=> setConfirmPassword(e.target.value)}/>
                 </div>
 
                 <div className="formElement">
-                    <button onClick={handleClick} id='signUpButton'>Sign Up</button>
+                    <button onClick={handleClick} className='authbtn'>SIGN UP</button>
                 </div>
 
                 <div className="formElement">
