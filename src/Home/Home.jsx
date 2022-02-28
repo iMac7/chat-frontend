@@ -4,8 +4,13 @@ import TweetArea from './TweetArea'
 import Tweets from './Tweets.jsx'
 import StickyHomeNav from './StickyHomeNav'
 import './home.css'
+import { AuthContext } from '../Homepage'
+
 
 function Home() {
+    const {userdata} = useContext(AuthContext)
+    const {userID, token} = userdata
+
 
     return (
             <article className='home'>
@@ -17,6 +22,9 @@ function Home() {
                     <br />
                     <Tweets/>
                 </div>
+                {
+                // console.log(`token:${token}, uid:${userID}`)
+                }
             </article>
     )
 }

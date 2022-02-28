@@ -38,14 +38,14 @@ function ForgotPassword() {
                 
                 <div className="formElement">
                     <label htmlFor="email" >EMAIL</label>
-                    <input type="text" name='text' id='signInFormInput'
+                    <input type="text" name='text' className='signInFormInput'
                     value={email}
                     onChange={e=> setEmail(e.target.value)}/>
                 </div>
 
                 <div className="formElement">
                     <Link to='/signUp'>Sign Up</Link>
-                    <Link to='/signIn'>Sign In</Link>
+                    <Link to='/signIn'>Already have an account? Sign In</Link>
                 </div>
             </form>
         </div>

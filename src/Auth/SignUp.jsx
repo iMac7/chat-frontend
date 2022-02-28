@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './signUp.css' 
 import {Link, useNavigate} from 'react-router-dom'
-
+import { AuthContext } from '../Homepage'
 
 function SignUp() {
     const navigate = useNavigate()
@@ -9,14 +9,13 @@ function SignUp() {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
-    useEffect(() => {
-        if(localStorage.getItem('userData'))
-        {
-            navigate('/')
-            // && Date.now() - JSON.parse(localStorage.getItem('userData')).createdAt < 1000*60*60*23.9)
-        }   
-    }, [])
+    const {isLoggedIn} = useContext(AuthContext)
 
+    useEffect(() => {
+        if(isLoggedIn){
+            navigate('/signin')
+        }
+    }, [navigate, isLoggedIn])
 
     const handleClick =(e)=>{
         e.preventDefault()
@@ -33,9 +32,10 @@ function SignUp() {
         .then(res=> {return res.json()})
         .then(user => {
             if(user){
-                localStorage.setItem('userData',
-                JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt}))
-                navigate('/signIn')
+                console.log(user);
+                // localStorage.setItem('userData',
+                // JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt}))
+                // navigate('/signIn')
             }
         })    
     }
@@ -48,6 +48,7 @@ function SignUp() {
                 <input type="text" name='text' id='text'
                 value={username}
                 onChange={e=> setUsername(e.target.value)}/> */}
+                {console.log(isLoggedIn)}
 
                 <div className="formElement">
                     <label htmlFor="email">EMAIL</label>
@@ -75,7 +76,7 @@ function SignUp() {
                 </div>
 
                 <div className="formElement">
-                    <Link to='/signIn'>Sign In</Link>
+                    <Link to='/signIn'>Already have an account? Sign In</Link>
                     <Link to='/forgotPassword'>Forgot Password?</Link>
                 </div>
                 

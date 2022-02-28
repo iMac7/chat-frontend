@@ -75,5 +75,6 @@
 }
 
 #tweetBtn:active {
-    background-color: rgb(211, 248, 255);
+    background-color: black;
+    color: white;
 }

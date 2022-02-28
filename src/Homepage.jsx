@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 import './homepage.css'
 import Sidenav from './Sidenav/Sidenav'
@@ -13,23 +13,29 @@ import ForgotPassword from './Auth/ForgotPassword'
 import MobileNav from './Sidenav/MobileNav'
 import Chatroom from './Chatroom/Chatroom'
 import Profile from './Profile/Profile'
-import {AuthProvider, AuthContext} from './Context/AuthProvider'
+
+export const AuthContext = React.createContext()
 
 function Homepage() {
-    // const auth = useContext(AuthContext)
-    // let isLoggedIn = true
-    
-    // useEffect(() => {
-    //     const userdata = JSON.parse(localStorage.getItem('userData')) 
-    //     if(userdata){
-    //        isLoggedIn = true
-    //     }else{
-    //         isLoggedIn = false
-    //     }
-    // }, [])
-    
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+        const {userdata} = JSON.parse(localStorage.getItem('userData'))
+        if(userdata){
+           setIsLoggedIn(true)
+        }else{
+            setIsLoggedIn(false)
+        }
+    }, [isLoggedIn])
+
+    const userdata = JSON.parse(localStorage.getItem('userData'))
+
 
     return (
+    <AuthContext.Provider value={{
+        isLoggedIn:isLoggedIn,
+        userdata: userdata        
+        }}>
         <BrowserRouter>
                 <Routes>
                         <Route path='/signUp' element={<SignUp/>} />    
@@ -57,9 +63,12 @@ function Homepage() {
                         <Route path='/profile'element={<Profile/>}/>
                        
                         {/* <Route path='*' element={<Error/>} /> */}
+                        {console.log(isLoggedIn)}
 
                 </Routes>
-            </BrowserRouter> 
+            </BrowserRouter>
+            </AuthContext.Provider>
+
     )
 }
 

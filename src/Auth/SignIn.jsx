@@ -1,21 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
-
+import { AuthContext } from '../Homepage'
 import('./signIn.css')
 
 function SignIn(props) {
 
     const navigate = useNavigate()
-    let auth = false
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const {isLoggedIn} = useContext(AuthContext)
 
-    // useEffect(() => {
-    //         if(localStorage.getItem('userData'))
-    //         // && Date.now() - JSON.parse(localStorage.getItem('userData')).createdAt < 1000*60*60*23.9){
-    //            { navigate('/')
-    //         }   
-    //     }, [])
+
+    useEffect(() => {
+            if(isLoggedIn){
+                navigate('/')
+            }
+        }, [navigate, isLoggedIn])
 
 
     const handleClick =(e)=>{
@@ -25,17 +25,22 @@ function SignIn(props) {
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json',
-            'Authorization' : localStorage.getItem('userData')
         },
-          credentials: 'include',
+          credentials: 'include', 
           body:JSON.stringify(
             {email:email, password:password}
           )
         })
-        .then(res=> {return res.json()})
+        .then(res=> {
+            return res.json()
+        })
         .then(user => {
-            localStorage.setItem('userData',
-             JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt }))
+            console.log(user);
+            if(user && user!=={}){
+                localStorage.setItem('userData',
+                 JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt }))
+                navigate('/')
+            }
         })
     }
 
@@ -71,7 +76,7 @@ function SignIn(props) {
                         <Link to='/forgotPassword'>Forgot Password?</Link>
                     </div>
                     
-                    {console.log(auth)}
+                    {console.log(isLoggedIn)}
                 </form>
             </section>
     )

@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { AuthContext } from '../Homepage'
 import ImgUpload from '../Shared/ImgUpload'
 import './tweetArea.css'
 
+
 function TweetArea() {
+  const {userdata} = useContext(AuthContext)
+  const {userID, token} = userdata
 
   const [post, setPost] = useState('')
   const [image, setImage] = useState()
@@ -11,8 +15,8 @@ function TweetArea() {
     e.preventDefault()
           
     const formdata = new FormData()
-    formdata.append('post', post)
-    formdata.append('sender', localStorage.getItem('userData'))
+    formdata.append('content', post)
+    formdata.append('sender', userID)
     formdata.append('image', image)
     
     fetch("http://localhost:3001/publicpost",{
