@@ -35,7 +35,7 @@ function TweetArea() {
 
               <div className="rightTweetNav">
                 <textarea type="text" className='tweetInput' 
-                rows={2} maxLength={64} required
+                rows={2} maxLength={100} required
                 value={post}
                 onChange={e=> setPost(e.target.value)}
                 />

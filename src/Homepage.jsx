@@ -1,5 +1,6 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom'
 import React, { createContext, useEffect, useState } from 'react'
+import {motion, AnimatePresence} from 'framer-motion'
 
 import './homepage.css'
 import Sidenav from './Sidenav/Sidenav'
@@ -18,6 +19,20 @@ export const AuthContext = React.createContext()
 
 function Homepage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const location = useLocation()
+    const routeVariants = {
+        hidden:{
+            opacity: 0
+        },
+        visible:{
+            opacity:1,
+            transition: {delay: 1.5, duration:0.5 }
+        },
+        exit:{
+            y: "-100vh",
+            transition: {ease: "easeInOut"}
+        }
+    }
 
     useEffect(() => {
         const {userdata} = JSON.parse(localStorage.getItem('userData'))
@@ -32,12 +47,13 @@ function Homepage() {
 
 
     return (
+        
     <AuthContext.Provider value={{
         isLoggedIn:isLoggedIn,
         userdata: userdata        
         }}>
-        <BrowserRouter>
-                <Routes>
+            
+                <Routes location={location} key={location.key}>
                         <Route path='/signUp' element={<SignUp/>} />    
                         <Route path='/signIn'element={<SignIn/>}/>
                         <Route path='/forgotPassword'element={<ForgotPassword/>}/>
@@ -63,11 +79,10 @@ function Homepage() {
                         <Route path='/profile'element={<Profile/>}/>
                        
                         {/* <Route path='*' element={<Error/>} /> */}
-                        {console.log(isLoggedIn)}
+                        {console.log(new Date().toLocaleString())}
 
                 </Routes>
-            </BrowserRouter>
-            </AuthContext.Provider>
+    </AuthContext.Provider>
 
     )
 }

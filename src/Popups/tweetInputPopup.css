@@ -1,0 +1,25 @@
+.tweetInputPopupContainer {
+    width: 100vw;
+    height: 70vh;
+    position: absolute;
+    z-index: 11;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    border-bottom: 1px solid lightgray;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.tweetBox {
+    border-bottom: none;
+}
+
+.tweetInputPopup {
+    width: 40vw;
+    min-width: 300px;
+    background: lightgray;
+    height: 50%;
+}
+
+#popupTweetArea {}
