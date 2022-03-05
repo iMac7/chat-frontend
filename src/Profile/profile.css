@@ -1,0 +1,59 @@
+.profile {
+    height: 100vh;
+    width: 50vw;
+    border: 1px solid gray;
+}
+
+.topContainer {
+    background: rgba(0, 0, 0, .5);
+    position: relative;
+    z-index: 15;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 5rem;
+}
+
+.bottomContainer {}
+
+.bottomContainer1 {
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-around;
+    background: lightgray;
+}
+
+.bottomContainer2 {
+    padding: 5rem 2rem 1rem 2rem;
+}
+
+.profilePic {
+    background: url('../../../assets/starry_sky.jpg');
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    transform: translateY(50%);
+}
+
+.profilebtn {
+    border: 1px solid gray;
+    outline: none;
+    height: 3rem;
+    width: 6rem;
+    border-radius: 10px;
+    transform: translateY(200%);
+    transition: 300ms;
+}
+
+.profilebtn:hover {
+    background-color: gray;
+    text-shadow: 3px -1px 3px white;
+}
+
+.profilebtn:active {
+    background: black;
+    color: white;
+    text-shadow: 3px -1px 3px white;
+}

@@ -11,18 +11,24 @@ function TweetArea() {
   const [post, setPost] = useState('')
   const [image, setImage] = useState()
             
+  const formdata = new FormData()
+  
   const handleClick =(e)=>{
     e.preventDefault()
-          
-    const formdata = new FormData()
+    
     formdata.append('content', post)
     formdata.append('sender', userID)
     formdata.append('image', image)
-    
+
     fetch("http://localhost:3001/publicpost",{
         method: 'POST',
-          body: formdata,
+          body: formdata
     })
+    .then( res => res.json())
+    .then(parsed => console.log(parsed))
+
+    console.log(formdata);
+
     }
 
 
