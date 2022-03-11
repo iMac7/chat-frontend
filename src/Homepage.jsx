@@ -14,6 +14,7 @@ import ForgotPassword from './Auth/ForgotPassword'
 import MobileNav from './Sidenav/MobileNav'
 import Chatroom from './Chatroom/Chatroom'
 import Profile from './Profile/Profile'
+import Settings from './Settings/Settings'
 
 export const AuthContext = React.createContext()
 
@@ -53,30 +54,23 @@ function Homepage() {
         userdata: userdata        
         }}>
             
+                <Sidenav className='sideNavComponent'/>
+                <MobileNav className='mobileNavComponent'/>
+
                 <Routes location={location} key={location.key}>
+
                         <Route path='/signUp' element={<SignUp/>} />    
                         <Route path='/signIn'element={<SignIn/>}/>
                         <Route path='/forgotPassword'element={<ForgotPassword/>}/>
 
-                        <Route path='/' element={
-                            <div className="app">
-                                <Sidenav className='appComponent sideNav'/>
-                                {/* <MobileNav/> */}
-                                <Home className='appComponent home'/>
-                                {/* <Trends className='appComponent trends'/> */}
-                            </div>
-                        }/>
-
-                        {/* <Route element={<RequireAuth/>}/> */}
-                        <Route path='/protected' element={
-                                <div className='protected'>
-                                <h1>protected</h1>
-                                </div>
-                            }/>
+                        <Route path='/' element={<Home/>}/>
 
                         <Route path='/chatroom'element={<Chatroom/>}/>
 
                         <Route path='/profile'element={<Profile/>}/>
+
+                        <Route path='/settings'element={<Settings/>}/>
+
                        
                         {/* <Route path='*' element={<Error/>} /> */}
                         {console.log(new Date().toLocaleString())}

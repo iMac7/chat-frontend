@@ -2,14 +2,17 @@ import React, {useEffect, useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './tweets.css'
 import { AuthContext } from '../Homepage'
+import { useQuery } from 'react-query'
 
 
 function Tweets() {
     const {userdata} = useContext(AuthContext)
-
     const [posts, setPosts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [liked, setLiked] = useState(false)
     const navigate = useNavigate()
+    // const {} = useQuery()
+
 
     useEffect(() => {
         try {
@@ -54,6 +57,7 @@ function Tweets() {
         })
         .then( res => res.json())
         .then(parsed => console.log(parsed))
+        .then( setLiked(!liked))
     }
 
 
@@ -93,6 +97,9 @@ function Tweets() {
                 </section>
              )
         }
+
+        {/*verified
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" color="#000"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
 
         </>
     )
