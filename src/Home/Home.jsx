@@ -9,9 +9,10 @@ import TweetInputPopup from '../Popups/TweetInputPopup'
 
 
 function Home() {
-    const {userdata} = useContext(AuthContext)
-    const {userID, token} = userdata
-    const [isOpen, setIsOpen] = useState(false)
+        
+        const {userdata} = useContext(AuthContext)
+        const {userID, token} = userdata
+        const [isOpen, setIsOpen] = useState(false)
 
 
     return (

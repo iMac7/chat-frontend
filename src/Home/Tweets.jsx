@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, { useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './tweets.css'
 import { AuthContext } from '../Homepage'
@@ -7,45 +7,52 @@ import { useQuery } from 'react-query'
 
 function Tweets() {
     const {userdata} = useContext(AuthContext)
-    const [posts, setPosts] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
     const [liked, setLiked] = useState(false)
     const navigate = useNavigate()
-    // const {} = useQuery()
 
+    // const fetchTweets = () => {
+    //     return fetch("http://localhost:3001/publicposts",{
+    //         headers : {
+    //             'authorization' : localStorage.getItem('userData')
+    //         }})
+    //     .then(res =>{
+    //         if(!res.ok){throw new Error(res.message)}
+    //         else{
+    //             return res.json()}
+    //         })
+    //     .then(data =>{
+    //         console.log(data);
 
-    useEffect(() => {
-        try {
-            fetch("http://localhost:3001/publicposts",{
-                headers : {
-                    'authorization' : localStorage.getItem('userData')
-                }
-            }
-            )
+    //         if(data === '/login'){
+    //             navigate('/signin')
+    //         }else{
+    //             setPosts(data)                    
+    //         }})    
+    // }
+
+    const fetchTweets = async () => {
+        return await fetch("http://localhost:3001/publicposts",{
+            headers : {
+                'authorization' : localStorage.getItem('userData')
+            }})
             .then(res =>{
                 if(!res.ok){throw new Error(res.message)}
                 else{
                     return res.json()}
-                })
-            .then(data =>{
-                console.log(data);
+                }) 
+    }
 
-                if(data === '/login'){
-                    navigate('/signin')
-                }else{
-                    setPosts(data)                    
-                }
-            })    
-            
-            setIsLoading(false)
-            
-        } catch (error) {
-            console.log(error);
+
+    const {isLoading, data, isError, error} = useQuery(
+        'tweets',
+        fetchTweets, 
+        {
+        staleTime: 30000,
         }
-        }, [navigate]) 
+    )
+    const posts = data
 
     function handleLikeClick (id) {
-
         fetch('http://localhost:3001/likePost', {
             headers:{
                 'content-type': 'application/json',
@@ -60,20 +67,31 @@ function Tweets() {
         .then( setLiked(!liked))
     }
 
-
     return (
         <>
+        {
+            isLoading && 
+            <svg width="32px" height="32px" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="#000000"><g fill="none" fillRule="evenodd" strokeWidth="2"><circle cx="22" cy="22" r="1"><animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"></animate></circle><circle cx="22" cy="22" r="1"><animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"></animate></circle></g></svg>
+        }
+
+        {
+            isError && <h2>{error.message}</h2>
+        }
+
         {   
-            !isLoading && posts !==[] &&
+            !isLoading && posts !==[] && posts &&
             posts.map(post =>
                 <section key={post._id} className='post'>
                      
                     <p className="senderID">{post.senderID}</p>
+
+                    <div onClick={() => {navigate(`/replies/${post._id}`)}}>
                     <div> {post.content} </div>
                     {
                        post.imageUrl && post.imageUrl !== "undefined" &&
                        <img className='tweetFile' src={`http://localhost:3001/${post.imageUrl}`} alt="" />
                     }
+                    </div>
 
                     <div className="postIcons">
 
@@ -100,7 +118,6 @@ function Tweets() {
 
         {/*verified
         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" color="#000"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> */}
-
         </>
     )
 }

@@ -1,6 +1,8 @@
-import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom'
 import React, { createContext, useEffect, useState } from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
+import {QueryClientProvider, QueryClient} from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
 
 import './homepage.css'
 import Sidenav from './Sidenav/Sidenav'
@@ -14,35 +16,38 @@ import ForgotPassword from './Auth/ForgotPassword'
 import MobileNav from './Sidenav/MobileNav'
 import Chatroom from './Chatroom/Chatroom'
 import Profile from './Profile/Profile'
-import Settings from './Settings/Settings'
+import Replies from './Replies/Replies'
 
 export const AuthContext = React.createContext()
+const queryClient = new QueryClient()
 
 function Homepage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const location = useLocation()
-    const routeVariants = {
-        hidden:{
-            opacity: 0
-        },
-        visible:{
-            opacity:1,
-            transition: {delay: 1.5, duration:0.5 }
-        },
-        exit:{
-            y: "-100vh",
-            transition: {ease: "easeInOut"}
-        }
-    }
-
+    const navigate = useNavigate()
+    // const routeVariants = {
+    //     hidden:{
+    //         opacity: 0
+    //     },
+    //     visible:{
+    //         opacity:1,
+    //         transition: {delay: 1.5, duration:0.5 }
+    //     },
+    //     exit:{
+    //         y: "-100vh",
+    //         transition: {ease: "easeInOut"}
+    //     }
+    // }
+    
     useEffect(() => {
-        const {userdata} = JSON.parse(localStorage.getItem('userData'))
+        const userdata = JSON.parse(localStorage.getItem('userData'))
         if(userdata){
            setIsLoggedIn(true)
         }else{
             setIsLoggedIn(false)
+            navigate('/signin')
         }
-    }, [isLoggedIn])
+    }, [isLoggedIn, navigate])
 
     const userdata = JSON.parse(localStorage.getItem('userData'))
 
@@ -53,6 +58,7 @@ function Homepage() {
         isLoggedIn:isLoggedIn,
         userdata: userdata        
         }}>
+            <QueryClientProvider client={queryClient}>
             
                 <Sidenav className='sideNavComponent'/>
                 <MobileNav className='mobileNavComponent'/>
@@ -63,21 +69,18 @@ function Homepage() {
                         <Route path='/signIn'element={<SignIn/>}/>
                         <Route path='/forgotPassword'element={<ForgotPassword/>}/>
 
-                        <Route path='/' element={<Home/>}/>
-
+                        {isLoggedIn && <Route path='/' element={<Home/>}/>}
                         <Route path='/chatroom'element={<Chatroom/>}/>
-
                         <Route path='/profile'element={<Profile/>}/>
+                        <Route path='/replies/:id'element={<Replies/>}/>
 
-                        <Route path='/settings'element={<Settings/>}/>
-
-                       
                         {/* <Route path='*' element={<Error/>} /> */}
-                        {console.log(new Date().toLocaleString())}
+                        {/* {console.log(new Date().toLocaleString())} */}
 
                 </Routes>
+            <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
+            </QueryClientProvider>
     </AuthContext.Provider>
-
     )
 }
 
