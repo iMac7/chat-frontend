@@ -31,8 +31,34 @@ function Profile() {
         }
         }, [userID, userdata]) 
 
-        const handleClick = (e) => {
+        const handleClick = async (e) => {
             e.preventDefault()
+
+            const formdata = new FormData()
+            formdata.append('username', username)
+            formdata.append('bio', bio)
+
+            if(username === user.username && bio === user.bio){
+                console.log('nothing changed!');
+            }else{
+                try {
+                    await fetch(`http://localhost:3001/profile/${userID}/update`,{
+                        method: 'POST',
+                        headers : {
+                            'authorization' : userdata,
+                            // Accept: 'multipart/form-data',
+                            'Content-Type': 'application/json',
+                        },
+                        body:JSON.stringify({username,bio}),
+                    })
+                    // .then( res => res.json())
+                    // .then(parsed => console.log(parsed))
+                
+                }            
+                catch (error) {
+                    console.log(error);
+                }
+            }
         }
         
     return (
@@ -52,13 +78,9 @@ function Profile() {
                     </button>
                 </div>
                 <div className="bottomContainer2">
-                {/* { user.username?
-                    <input type="text" value={'name'}/>:
-                    <input type="text" value={' no name'}/>
-                }                 */}
-                    <input className='edit' type="text" placeholder={user.username}
+                    Username : <input className='edit' type="text" placeholder={user.username}
                     onChange={e => setUsername(e.target.value)} />
-                    <input className='edit' type="text" placeholder={user.bio? user.bio : ''}
+                    Bio : <input className='edit' type="text" placeholder={user.bio? user.bio : ''}
                     onChange={e => setBio(e.target.value)} />
 
                 </div>

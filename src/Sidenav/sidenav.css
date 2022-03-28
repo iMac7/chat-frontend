@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 .sideNav {
-    width: 25%;
+    width: 170px;
     height: 100vh;
     display: flex;
     gap: 0.5rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 0px;
+    padding: 40px 10px;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     position: absolute;
@@ -86,7 +86,7 @@
     background: gray;
 }
 
-@media(max-width:350px) {
+@media(max-width:450px) {
     .sideNav {
         display: none;
     }

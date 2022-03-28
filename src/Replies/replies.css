@@ -1,0 +1,19 @@
+.replies {
+    width: 70%;
+    height: 50%;
+}
+
+.replies>* {
+    padding: 0.5rem 0;
+}
+
+.tweetFile {
+    margin-top: 0.5rem;
+}
+
+.replyInput {
+    height: 2rem;
+    line-height: 1.3rem;
+    width: 50%;
+    padding: 0.3rem 5rem;
+}

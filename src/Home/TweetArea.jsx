@@ -26,7 +26,6 @@ function TweetArea() {
     await fetch("http://localhost:3001/publicPost",{
         method: 'POST',
           body: formdata
-          // body: 'vafgvsafvafaf'
     })
     .then( res => res.json())
     .then(parsed => console.log(parsed))

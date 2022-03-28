@@ -7,12 +7,3 @@
     background-size: 100% 100%;
     font-family: 'Open Sans', sans-serif;
 }
-
-@media(max-width: 400px) {
-    .sideNavComponent {
-        display: none;
-    }
-    .mobileNavComponent {
-        display: flex;
-    }
-}

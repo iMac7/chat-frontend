@@ -7,7 +7,7 @@
     width: 100%;
     height: 4rem;
     padding: 0 0.5rem;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(117, 117, 117, 0.6);
     backdrop-filter: blur(5px);
     transition: 300ms;
 }
@@ -23,16 +23,20 @@
     align-items: center;
     justify-content: center;
     transition: 300ms;
+    margin: 5px;
 }
 
 .mobileNavItem:hover {
+    background: rgb(59, 59, 59);
+}
+
+.mobileNavItem:active {
     background: black;
-    border: 1px solid gray;
 }
 
 .mobileNavIcon {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     fill: lightgray;
 }
 
@@ -40,20 +44,25 @@
     position: absolute;
     z-index: 11;
     fill: white;
-    width: 3.5rem;
-    height: 3.5rem;
-    background: rgb(0, 0, 0);
+    width: 3rem;
+    height: 3rem;
+    background: rgba(0, 0, 0, 0.3);
     padding: 10px;
     border-radius: 50%;
     transition: 300ms;
     left: 1rem;
-    bottom: 0.25rem;
+    bottom: 1rem;
     cursor: pointer;
+}
+
+.mobileNav-toggle:hover,
+.mobileNav-toggle:active {
+    background: rgb(0, 0, 0);
 }
 
 .mobileNav-toggle-closed {
     transform: rotate(180deg);
-    background: rgb(0, 0, 0);
+    transition: 300ms;
 }
 
 #mobileNav-toggle {
@@ -62,7 +71,7 @@
     fill: white;
 }
 
-@media(min-width:351px) {
+@media(min-width:451px) {
     .mobileNav {
         display: none;
     }

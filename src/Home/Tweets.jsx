@@ -10,26 +10,6 @@ function Tweets() {
     const [liked, setLiked] = useState(false)
     const navigate = useNavigate()
 
-    // const fetchTweets = () => {
-    //     return fetch("http://localhost:3001/publicposts",{
-    //         headers : {
-    //             'authorization' : localStorage.getItem('userData')
-    //         }})
-    //     .then(res =>{
-    //         if(!res.ok){throw new Error(res.message)}
-    //         else{
-    //             return res.json()}
-    //         })
-    //     .then(data =>{
-    //         console.log(data);
-
-    //         if(data === '/login'){
-    //             navigate('/signin')
-    //         }else{
-    //             setPosts(data)                    
-    //         }})    
-    // }
-
     const fetchTweets = async () => {
         return await fetch("http://localhost:3001/publicposts",{
             headers : {
@@ -41,7 +21,6 @@ function Tweets() {
                     return res.json()}
                 }) 
     }
-
 
     const {isLoading, data, isError, error} = useQuery(
         'tweets',
@@ -83,7 +62,7 @@ function Tweets() {
             posts.map(post =>
                 <section key={post._id} className='post'>
                      
-                    <p className="senderID">{post.senderID}</p>
+                    <p className="senderID">{post.sender}</p>
 
                     <div onClick={() => {navigate(`/replies/${post._id}`)}}>
                     <div> {post.content} </div>
@@ -106,7 +85,7 @@ function Tweets() {
                         </div>
 
                         <div className="postIcon">
-                            <svg className='postsvg postsvg_replies' width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path></svg>
+                            <svg className='postsvg postsvg_replies' width="32px" height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" color="#000000"><path fillRule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12H9.06l-2.573 2.573A1.457 1.457 0 014 13.543V12H2.75A1.75 1.75 0 011 10.25v-7.5z"></path></svg>
                             <div className='iconCount'>999</div>
                         </div>
             
