@@ -1,12 +1,20 @@
 import './mobileNav.css'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../Homepage'
 
 function MobileNav() {
+    const {isLoggedIn} = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
+    const handleLogout = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('userData')
+        navigate('/login')
+    }
 
     return (
+        isLoggedIn &&
         <>        
         <div className={`mobileNav-toggle ${!isOpen && 'mobileNav-toggle-closed'}`}
             onClick={()=> setIsOpen(!isOpen)}
@@ -31,7 +39,12 @@ function MobileNav() {
 
             <div className="mobileNavItem"
             onClick={() => {navigate('/profile')}}>
-                <svg width="32px" height="32px" className='mobileNavIcon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000000"><path fillRule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>      
+                <svg className='mobileNavIcon' width="32px" height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000000"><path fillRule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>      
+            </div>         
+
+            <div className="mobileNavItem"
+            onClick={handleLogout}>
+                <svg className='mobileNavIcon' width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"></path></svg>
             </div>                
 
         </nav>

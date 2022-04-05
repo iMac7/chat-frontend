@@ -11,11 +11,12 @@ function SignUp() {
 
     const {isLoggedIn} = useContext(AuthContext)
 
-    useEffect(() => {
-        if(isLoggedIn){
-            navigate('/signin')
-        }
-    }, [navigate, isLoggedIn])
+    // useEffect(() => {
+    //     if(isLoggedIn===true){
+    //         console.log(isLoggedIn);
+    //         navigate('/')
+    //     }
+    // }, [navigate, isLoggedIn])
 
     const handleClick =(e)=>{
         e.preventDefault()

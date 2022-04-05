@@ -7,9 +7,7 @@ import './home.css'
 import { AuthContext } from '../Homepage'
 import TweetInputPopup from '../Popups/TweetInputPopup'
 
-
 function Home() {
-        
         const {userdata} = useContext(AuthContext)
         const {userID, token} = userdata
         const [isOpen, setIsOpen] = useState(false)

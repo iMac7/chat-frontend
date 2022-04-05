@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 10px;
+    padding: 40px 0;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     position: absolute;
@@ -49,6 +49,7 @@
     align-items: center;
     flex-shrink: 0;
     transition: 300ms;
+    padding-left: 1rem;
 }
 
 .navItem:hover {
@@ -79,11 +80,7 @@
 }
 
 .sidenav-toggle-svg:hover {
-    background: rgb(93, 93, 93);
-}
-
-.sidenav-toggle-svg:active {
-    background: gray;
+    background: black;
 }
 
 @media(max-width:450px) {

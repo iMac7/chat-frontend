@@ -7,7 +7,6 @@ import {ReactQueryDevtools} from 'react-query/devtools'
 import './homepage.css'
 import Sidenav from './Sidenav/Sidenav'
 import Home from './Home/Home'
-import Trends from './Trends/Trends'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
 import Error from './Error'
@@ -25,23 +24,10 @@ function Homepage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
-    // const routeVariants = {
-    //     hidden:{
-    //         opacity: 0
-    //     },
-    //     visible:{
-    //         opacity:1,
-    //         transition: {delay: 1.5, duration:0.5 }
-    //     },
-    //     exit:{
-    //         y: "-100vh",
-    //         transition: {ease: "easeInOut"}
-    //     }
-    // }
     
     useEffect(() => {
         const userdata = JSON.parse(localStorage.getItem('userData'))
-        if(userdata){
+        if(userdata?.token){
            setIsLoggedIn(true)
         }else{
             setIsLoggedIn(false)
@@ -51,9 +37,7 @@ function Homepage() {
 
     const userdata = JSON.parse(localStorage.getItem('userData'))
 
-
-    return (
-        
+    return (        
     <AuthContext.Provider value={{
         isLoggedIn:isLoggedIn,
         userdata: userdata        
@@ -85,4 +69,3 @@ function Homepage() {
 }
 
 export default Homepage
-

@@ -1,20 +1,19 @@
 .tweets::-webkit-scrollbar {
-    /* width: .5rem; */
-    display: none;
+    width: .5rem;
+    /* display: none; */
 }
 
-
-/* .tweets::-webkit-scrollbar-track {
+.tweets::-webkit-scrollbar-track {
     background: white;
     border-radius: 100vw;
     margin-block: .4rem;
 }
 
 .tweets::-webkit-scrollbar-thumb {
-    background: rgb(177, 177, 177);
+    background: rgb(114, 114, 114);
     border-radius: 100vw;
     border: 1px solid white;
-} */
+}
 
 .tweetContent {
     display: flex;

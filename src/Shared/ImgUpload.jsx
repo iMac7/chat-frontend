@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
+import Resizer from 'react-image-file-resizer'
 import './imgUpload.css'
 
 function ImgUpload(props) {
@@ -6,10 +7,12 @@ function ImgUpload(props) {
     const [previewURL, setPreviewURL] = useState()
     const [isValid, setIsValid] = useState(false)
     
+    //image preview
     useEffect(() => {
        if(!file){
            return
        }
+
        const fileReader = new FileReader();
        fileReader.onload = ()=>{
            setPreviewURL(fileReader.result);
@@ -21,20 +24,36 @@ function ImgUpload(props) {
 
     const filePickerRef = useRef()
 
-    const onFileChange = (e)=>{
+    //image resize
+    const resizeFile = (file) =>
+    new Promise((resolve) => {
+        Resizer.imageFileResizer(
+        file,
+        400,
+        400,
+        "WEBP",
+        100,
+        0,
+        (uri) => resolve(uri),
+        "file"
+        )
+    })
+
+
+    const onFileChange = async (e)=>{
         let fileIsValid = isValid;
 
         if(e.target.files && e.target.files.length === 1){
-            setFile(e.target.files[0])
+            // setFile(e.target.files[0])
+            const unOptimizedImage = e.target.files[0]
+            const optimized = await resizeFile(unOptimizedImage)
+            setFile(optimized)
             fileIsValid = true
             setIsValid(true)
         }else{
             fileIsValid = false
             setIsValid(false)
         }
-        // props.childImage(props.id, pickedFile, fileIsValid)
-        // props.childImage(file)
-
     }
 
     const pickImage = ()=>{
@@ -56,7 +75,7 @@ function ImgUpload(props) {
             </svg>
 
             <input type="file" className='fileUpload' id={props.id}
-            ref={filePickerRef} accept='.png,.jpg,.jpeg'
+            ref={filePickerRef} accept='.png,.jpg,.jpeg,.WEBP'
             style={{display:'none'}} onChange={onFileChange}/>
 
             <div className="preview">

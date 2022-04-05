@@ -1,15 +1,20 @@
-// import React, {useContext} from 'react'
-// import {Navigate, Outlet, useLocation} from 'react-router-dom'
+import React, {useContext, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../Homepage'
 
+function RequireAuth() {
+    const navigate = useNavigate()
+    const {isLoggedIn} = useContext(AuthContext)    
 
-// function RequireAuth() {
-//     const {auth} = useContext(AuthContext)
-//     const location = useLocation()
+    useEffect(() => {
+        if(isLoggedIn===false){
+            return navigate('/signin')
+        }else{
+            return navigate('/')
+        }        
+    }, [isLoggedIn,navigate])
+    
 
-//     return (
-//         auth === true ? <Outlet/>
-//         : <Navigate to='/signIn' state={{from:location}} replace />
-//     )
-// }
+}
 
-// export default RequireAuth
+export default RequireAuth

@@ -36,7 +36,7 @@ function SignIn(props) {
         })
         .then(user => {
             console.log(user);
-            if(user && user!=={}){
+            if(user.userID){
                 localStorage.setItem('userData',
                  JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt }))
                 navigate('/')
