@@ -27,12 +27,34 @@ function ImgUpload(props) {
     //image resize
     const resizeFile = (file) =>
     new Promise((resolve) => {
+        let quality = 100
+        let maxWidth = 200
+        let maxHeight = 200
+
+        if (file.size > 100000) {
+            maxWidth = 400
+            maxHeight = 300
+            quality = 80
+          }
+
+        if (file.size > 400000) {
+        maxWidth = 600
+        maxHeight = 400
+        quality = 80
+        }
+        
+        if (file.size > 800000) {
+        maxWidth = 1000
+        maxHeight = 800
+        quality = 75;
+        }        
+          
         Resizer.imageFileResizer(
         file,
-        400,
-        400,
+        maxWidth,
+        maxHeight,
         "WEBP",
-        100,
+        quality,
         0,
         (uri) => resolve(uri),
         "file"
