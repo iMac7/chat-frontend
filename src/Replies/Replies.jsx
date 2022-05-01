@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import reactdom from 'react-dom'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from '../Homepage'
@@ -49,7 +50,7 @@ function Replies() {
 }
 
 
-  return (
+  const reply =
     !isLoading &&
     <>
       <section key={replies._id} className='replies'>
@@ -85,13 +86,20 @@ function Replies() {
 
       </section>
 
-      <input className='replyInput' type="text" placeholder='Type your reply ...'/>
+      <div className="replyInput">
+        <input id='replyInput' type="text" placeholder='Type your reply ...'/>
+        <button className='replyInputBtn'>Reply</button>
+      </div>
       
-      <h2>replies</h2>
+      <div id="replies">
+        <h2>replies</h2>
+      </div>
  
     {/* {console.log(replies)} */}
     </>
-  )
+  
+  return reactdom.createPortal(reply, document.querySelector('#reply'))
+  
 }
 
 export default Replies

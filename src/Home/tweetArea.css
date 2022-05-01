@@ -48,41 +48,29 @@
     justify-content: space-between;
 }
 
-.imgUploadIcon {
-    width: 25px;
-    height: 25px;
-    transition: 250ms;
-}
-
-.imgUploadIcon:hover {
-    transform: scale(1.1);
-}
-
-.imgUploadIcon:active {
-    background-color: gray;
-}
-
 #tweetBtn {
     border: none;
-    background-color: lightblue;
     width: 4rem;
-    height: 2rem;
+    height: 2.5rem;
+    background-color: lightgray;
+    color: black;
+    border: 1px solid gray;
+    border-radius: 10px;
     transition: 300ms;
+}
+
+#tweetBtn:hover {
+    background-color: black;
+    color: white;
+}
+
+#tweetBtn:active {
+    transform: scale(1.15);
 }
 
 #tweetBtn:disabled {
     background: lightgray;
     cursor: not-allowed;
-}
-
-#tweetBtn:hover {
-    background-color: rgb(93, 93, 255);
-    color: rgb(235, 235, 235);
-}
-
-#tweetBtn:active {
-    background-color: black;
-    color: white;
 }
 
 .loader {

@@ -15,11 +15,17 @@ function TweetArea() {
   
   const handleClick =async (e)=>{
     e.preventDefault()
+    const trimmed = post.trim()
+
+    if(trimmed === '' && image === undefined) return console.log('post something dumbass')
     
     const formdata = new FormData()
-    formdata.append('content', post)
+    formdata.append('content', trimmed)
     formdata.append('sender', userID)
     formdata.append('image', image)
+
+    console.log(...formdata)
+    setImage()
 
     setIsLoading(true)
 
@@ -27,10 +33,26 @@ function TweetArea() {
         method: 'POST',
           body: formdata
     })
-    .then( res => res.json())
-    .then(parsed => console.log(parsed))
+    .then( res => {
+      setIsLoading(false)
+      return res.json()
+    })
+    .then(parsed => {
+      console.log(parsed)
+      setPost('')
+      return setImage()
+    })
+
+    // const data = await fetch("http://localhost:3001/publicPost",{
+    //       method: 'POST',
+    //         body: formdata
+    //   })
+    //   .then(data => data.json())
+    //   .then(parsed => console.log(parsed))
+
+    //   setIsLoading(false)
     
-    setIsLoading(false)
+    
 
     }
 
@@ -54,7 +76,7 @@ function TweetArea() {
                 <ImgUpload id='image' childImage={setImage}/>
 
                 <button id='tweetBtn' onClick={handleClick} 
-                // disabled={isLoading? true: false}
+                disabled={isLoading? true: false}
                 >
                   {
                     isLoading? 
