@@ -55,12 +55,10 @@ function Homepage() {
                         {isLoggedIn && <Route path='/' element={<Home/>}/>}
                         <Route path='/chatroom'element={<Chatroom/>}/>
                         <Route path='/profile'element={<Profile/>}/>
-                        <Route path='/replies/:id'element={<Replies/>}/>
-
-                        {/* <Route path='*' element={<Error/>} /> */}
-                        {/* {console.log(new Date().toLocaleString())} */}
+                        {/* <Route path='/replies/:id'element={<Replies/>}/> */}
 
                 </Routes>
+
             <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
             </QueryClientProvider>
     </AuthContext.Provider>

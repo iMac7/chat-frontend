@@ -24,6 +24,11 @@
     fill: black;
 }
 
+.head {
+    display: flex;
+    justify-content: space-between;
+}
+
 p.senderID {
     color: gray;
 }
@@ -74,8 +79,19 @@ p.senderID {
 }
 
 .postsvg_replies:hover {
-    fill: rgb(0, 0, 0);
+    fill: rgb(46, 46, 46);
     transform: scale(1.4);
+}
+
+.postsvg_delete {
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.postsvg_delete:hover {
+    background: rgb(43, 43, 43);
+    fill: white;
 }
 
 .postsvg:active {
@@ -96,3 +112,7 @@ p.senderID {
 /* .pageEnd {
     background-color: rgb(44, 44, 44);
 } */
+
+#replies {
+    right: 0;
+}

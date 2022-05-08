@@ -44,7 +44,7 @@
 }
 
 .profilePic {
-    background: url('../../../assets/starry_sky.jpg');
+    background: black;
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
@@ -62,7 +62,8 @@
 }
 
 .profilebtn:hover {
-    background-color: gray;
+    background-color: lightgray;
+    border: 3px solid gray;
 }
 
 .profilebtn:active {
@@ -87,4 +88,14 @@
 
 .edit:focus {
     border: 2px solid rgb(0, 98, 255);
+}
+
+h3 {
+    color: rgb(57, 57, 57);
+    text-decoration: underline;
+}
+
+.profileUpdate {
+    display: flex;
+    justify-content: space-between;
 }

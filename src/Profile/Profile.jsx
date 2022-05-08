@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Homepage'
+import ImgUpload from '../Shared/ImgUpload'
 import './profile.css'
 
 
@@ -12,6 +13,8 @@ function Profile() {
     const [user, setUser] = useState({})
     const [bio, setBio] = useState('')
     const [username, setUsername] = useState('')
+    const [image, setImage] = useState()
+
 
     useEffect(() => {
         try {
@@ -38,9 +41,7 @@ function Profile() {
             formdata.append('username', username)
             formdata.append('bio', bio)
 
-            // console.log(username === user.username, bio === user.bio)
-
-            if(username === user.username && bio === user.bio){
+            if(username === user.username && bio === user.bio && image){
                 console.log('nothing changed!');
             }else{
                 try {
@@ -62,6 +63,31 @@ function Profile() {
                 }
             }
         }
+
+        const handleProfile = async (e) => {
+            e.preventDefault()
+            if(!image) console.log('nothing changed!');
+            else{
+                const formdata = new FormData()
+                formdata.append('image',image)
+                try {
+                    await fetch(`http://localhost:3001/profilepic/${userID}/update`,{
+                        method: 'POST',
+                        headers : {
+                            'authorization' : JSON.stringify(userdata),
+                        },
+                        body:formdata,
+                    })
+                    // .then( res => res.json())
+                    // .then(parsed => console.log(parsed))
+                
+                }            
+                catch (error) {
+                    console.log(error);
+                }
+            }
+
+        }
         
     return (
         <div className='profile'>
@@ -76,7 +102,7 @@ function Profile() {
                     <div className="profilePic"></div>
                     <button className='profilebtn'
                     onClick={handleClick}>
-                        update profile
+                        Update Profile
                     </button>
                 </div>
                 <div className="bottomContainer2">
@@ -85,7 +111,16 @@ function Profile() {
                     Bio : <input className='edit' type="text" placeholder={user.bio? user.bio : ''}
                     onChange={e => setBio(e.target.value)} />
 
+                    <h3>Update profile picture</h3>
+                    <div className="profileUpdate">
+                        <ImgUpload childImage={setImage}/>
+                        <button id="tweetBtn"
+                        onClick={handleProfile}
+                        >UPDATE</button>
+                    </div>
+                    
                 </div>
+
             </div>
         </div>
     )

@@ -6,11 +6,13 @@ import StickyHomeNav from './StickyHomeNav'
 import './home.css'
 import { AuthContext } from '../Homepage'
 import TweetInputPopup from '../Popups/TweetInputPopup'
+import Replies from '../Replies/Replies'
 
 function Home() {
         const {userdata} = useContext(AuthContext)
         const {userID, token} = userdata
         const [isOpen, setIsOpen] = useState(false)
+        const [repliesIsOpen, setRepliesIsOpen] = useState(false)
 
 
     return (
@@ -31,6 +33,8 @@ function Home() {
                 // console.log(`token:${token}, uid:${userID}`)
                 }
                 <TweetInputPopup open={isOpen} closeModal={() => setIsOpen(false)}/>
+                {/* <Replies open={repliesIsOpen} closeModal={() => setRepliesIsOpen(false)}/>
+                {console.log(repliesIsOpen)} */}
 
             </article>
     )

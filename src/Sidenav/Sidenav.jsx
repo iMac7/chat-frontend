@@ -34,10 +34,10 @@ function Sidenav() {
                 <h3 className="navLabel">Profile</h3>
             </div>
 
-            <div className="navItem" onClick={()=>{navigate('/chatroom')}}>
+            {/* <div className="navItem" onClick={()=>{navigate('/chatroom')}}>
                 <svg width="32px" height="32px" className='navIcon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000000"><path fillRule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg>                
                 <h3 className="navLabel">Messages</h3>
-            </div>
+            </div> */}
 
             <div className="navItem" onClick={handleLogout}>
                 <svg className='navIcon' width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"></path></svg>

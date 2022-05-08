@@ -65,7 +65,7 @@
 }
 
 #tweetBtn:active {
-    transform: scale(1.15);
+    transform: scale(1.4);
 }
 
 #tweetBtn:disabled {
