@@ -38,6 +38,8 @@ function Profile() {
             formdata.append('username', username)
             formdata.append('bio', bio)
 
+            // console.log(username === user.username, bio === user.bio)
+
             if(username === user.username && bio === user.bio){
                 console.log('nothing changed!');
             }else{

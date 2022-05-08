@@ -12,7 +12,7 @@ function Tweets() {
     
     
     const fetchTweets = async ({pageParam = 1}) => {
-        return fetch(`http://localhost:3001/publicposts?limit=30&page=${pageParam}`,{
+        return fetch(`http://localhost:3001/publicposts?limit=10&page=${pageParam}`,{
             headers : {
                 'authorization' : localStorage.getItem('userData')
             }})
@@ -25,6 +25,7 @@ function Tweets() {
 
     const {isLoading, data, isError, error,
          hasNextPage, fetchNextPage, isFetching, isFetchingNextPage,
+         hasPreviousPage, fetchPreviousPage, isFetchingPreviousPage
         } = useInfiniteQuery(
             'tweets',
         fetchTweets, 
@@ -33,12 +34,16 @@ function Tweets() {
         // },
         {
             getNextPageParam: (lastPage, pages) => {
-                if(pages.length < 3){
-                    return pages.length + 1
-                }else{
-                    return undefined
-                }
-            }
+                // if(pages.length < 3){
+                //     return pages.length + 1
+                // }else{
+                //     return undefined
+                // }
+                return pages.length + 1
+            },
+            refetchOnWindowFocus: false,
+            refetchInterval: 10000,
+            
         }
         )
         
@@ -46,7 +51,7 @@ function Tweets() {
         const observer = useRef(
             new IntersectionObserver((entries) => {
                 const first = entries[0]
-                console.log(first)
+                // console.log(first)
                 if(first.isIntersecting) {
                     fetchNextPage()
                 }
@@ -93,14 +98,24 @@ function Tweets() {
         {isError && <h2>{error.message}</h2>}
 
         {/* {console.log(posts)} */}
+        
+        {/* <button
+            onClick={() => fetchPreviousPage()}
+            disabled={!hasPreviousPage || isFetchingPreviousPage}
+        >
+            {isFetchingPreviousPage
+            ? 'Loading more...'
+            : hasPreviousPage
+            ? 'Load Older'
+            : 'Nothing more to load'}
+        </button> */}
 
         {!isLoading && data !==[] && data &&
             data.pages.map((group , i) =>{
                return   (
-
+        group !==[] &&          
         <React.Fragment key={i}>
-            <h3 style={{'color':'blue'}}>---page {i+1}---</h3>
-
+            
             {group.map(post =>
             
             <section key={post._id} ref={setElement} className='post'>
@@ -134,15 +149,19 @@ function Tweets() {
         
                 </div>
                 
+                
             </section>
-        )}                 
-        </React.Fragment>)
+            )}
+                      
+        </React.Fragment>
+                        )
             }
         )
         }
         
-        <button disabled={!hasNextPage} onClick={fetchNextPage}
-        >Load more</button>
+        {/* <button disabled={!hasNextPage || isFetchingNextPage} onClick={fetchNextPage}
+        >Load more</button> */}
+        {/* {console.log(hasNextPage)} */}
         <h2>{isFetching && !isFetchingNextPage? 'loading...' : null}</h2>
 
         {/*verified
