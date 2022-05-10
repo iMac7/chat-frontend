@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import reactdom from 'react-dom'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AuthContext } from '../Homepage'
+import { AuthContext } from '../App'
 import './replies.css'
 
 
@@ -10,6 +10,7 @@ function Replies({ postID, closeModal }) {
   const { userdata } = useContext(AuthContext)
   const navigate = useNavigate()
   const [post, setPost] = useState('')
+  const [message, setMessage] = useState('')
 
   //fetching with usequery
   const fetchData = async () => {
@@ -24,20 +25,35 @@ function Replies({ postID, closeModal }) {
     refetchInterval: 10000,
   })
 
-  const handleClick = async () => {
+  // send reply
+  const handleClick = async (e) => {
+
+    if(post.trim() === ''){
+      setPost('text required')
+      setTimeout(() => {
+        setPost('')
+      }, 1000);
+      return
+    }
 
     await fetch(`http://localhost:3001/publicposts/${postID}/replies`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization':JSON.stringify(userdata)
       },
       method: 'POST',
-      body: JSON.stringify({ post: post, sender: userdata })
+      body: JSON.stringify({ post: post.trim(), sender: userdata })
     })
       .then((res) => res.json())
-      .then(parsed => console.log(parsed))
+      .then(parsed => {
+        if(parsed === 'reply sent !'){
+          setPost(parsed)
+          setTimeout(() => {
+            setPost('')
+          }, 1000);
+        }
+      })
       
-      setPost('')
-
   }
 
   //like & unlike button
@@ -45,7 +61,7 @@ function Replies({ postID, closeModal }) {
     await fetch('http://localhost:3001/likePost', {
       headers: {
         'content-type': 'application/json',
-        'authorization': userdata.token
+        'authorization': JSON.stringify(userdata)
       },
       body:
         JSON.stringify({ senderID: userdata.userID, postID: id }),
@@ -58,7 +74,7 @@ function Replies({ postID, closeModal }) {
 
   }
 
-  //delete button
+  //delete a reply
   const handleDelete = async (replyID)=>{
     fetch(`http://localhost:3001/publicPost/${postID}/replies/${replyID}`,{
         method:'DELETE',
@@ -68,23 +84,36 @@ function Replies({ postID, closeModal }) {
 
   }
 
+      //delete the main post
+  const handlePostDelete = async (id) => {
+    await fetch(`http://localhost:3001/publicPost/${id}/delete`, {
+      method: 'DELETE',
+      headers: {
+        'authorization': JSON.stringify(userdata),
+      }
+    })
+    closeModal()
+  }
+
+
 
   const reply =
-    // !isLoading && 
+    !isLoading && 
     <div className='replyContainer'>
       <section key={data._id} className='postreply'>
         <button className='close' onClick={closeModal}>X</button>
 
         <h1>REPLIES</h1>
         <div className="head">
-          <p className="senderID">{data.sender}</p>
+        <img src={`http://localhost:3001/${data.profileUrl}`} alt="" className='replyprofile'/>
+          <p className="senderID">{data?.sender}</p>
           <p className="senderID">
             {data.sendTime}
           </p>
         </div>
 
         {isLoading && <h4>loading...</h4>}
-        <div> {data.content} </div>
+        <div id='content'> {data.content} </div>
         <div className='replyFileContainer'>
           {
             data.imageUrl && post.imageUrl !== "undefined" &&
@@ -109,6 +138,14 @@ function Replies({ postID, closeModal }) {
             <div className='iconCount'>{data?.replies?.length}</div>
           </div>
 
+          {userdata.userID === data.senderID &&
+            <div className="postIcon">
+            <svg onClick={()=>handlePostDelete(postID)}
+            className='postsvg postsvg_delete' width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"></path></svg> 
+            </div>
+          }
+
+
         </div>
       </section>
 
@@ -116,16 +153,16 @@ function Replies({ postID, closeModal }) {
 
         <div className="replyInput">
           <input id='replyInput' type="text" placeholder='Type your reply ...'
-            onChange={e => setPost(e.target.value)} />
+            value={post} onChange={e => setPost(e.target.value)} />
           <button className='replyInputBtn' onClick={handleClick}>Reply</button>
         </div>
 
         <div id="replies">
           {data?.replies?.map(reply =>
             <div className="reply" key={reply._id}>
-              <div className="head">
+              <div className="head-replies">
 
-                <p className="senderID">{reply.senderName}</p>
+                <p className="senderID replysender">{reply.senderName}</p>
                 <p className="senderID">
                   {reply.sendTime}
                 </p>
@@ -138,7 +175,9 @@ function Replies({ postID, closeModal }) {
 
               </div>
 
-              <div> {reply.content} </div>
+              <div className='replycontent'>
+                 {reply.content} 
+              </div>
             </div>
           )}
         </div>

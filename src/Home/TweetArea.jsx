@@ -1,23 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { AuthContext } from '../Homepage'
+import { AuthContext } from '../App'
 import ImgUpload from '../Shared/ImgUpload'
 import './tweetArea.css'
 
 
 function TweetArea() {
-  const {userdata} = useContext(AuthContext)
-  const {userID, token} = userdata
+  const {userdata,isLoggedIn,profilePic} = useContext(AuthContext)
+  const {userID} = userdata
 
   const [isLoading, setIsLoading] = useState(false)
   const [post, setPost] = useState('')
   const [image, setImage] = useState()
-            
+  const [message, setMessage] = useState('')
+     
   
   const handleClick =async (e)=>{
     e.preventDefault()
     const trimmed = post.trim()
 
-    if(trimmed === '' && image === undefined) return console.log('post something dumbass')
+    if(trimmed === '') {
+      setMessage('text required')
+      setTimeout(() => {
+        setMessage('')
+      }, 2000);
+      return
+    }
     
     const formdata = new FormData()
     formdata.append('content', trimmed)
@@ -29,6 +36,9 @@ function TweetArea() {
     setIsLoading(true)
 
     await fetch("http://localhost:3001/publicPost",{
+        headers:{
+          authorization: JSON.stringify(userdata)
+        },
         method: 'POST',
           body: formdata
     })
@@ -38,18 +48,24 @@ function TweetArea() {
     })
     .then(parsed => {
       console.log(parsed)
+      if(typeof parsed === 'string'){
+        setMessage(parsed)
+        setTimeout(() => {
+          setMessage('')
+        }, 2000);
+      }
       setPost('')
-      return setImage()
+      setImage()
     })
 
     }
 
 
     return (
+        isLoggedIn &&
          <div className="tweetBox">
               <div className="leftTweetNav">
-                <div className="dp"></div>
-                <div></div>
+                {profilePic !==null && <img src={`http://localhost:3001/${profilePic}`} className='dp'/>}
               </div>
 
               <div className="rightTweetNav">
@@ -74,6 +90,7 @@ function TweetArea() {
                   </button>
 
                 </div>
+                    <p style={{color:"blue"}}>{message}</p>
             </div>
          </div>
     )

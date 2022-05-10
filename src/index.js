@@ -6,8 +6,8 @@ import {
     useLocation
   } from "react-router-dom";
 import './index.css'
-import Homepage from './Homepage'
+import App from './App'
 
 reactdom.render(
-<BrowserRouter><Homepage/></BrowserRouter>    
+<BrowserRouter><App/></BrowserRouter>    
 , document.querySelector('#root'))

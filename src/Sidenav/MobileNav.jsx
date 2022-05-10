@@ -1,16 +1,17 @@
 import './mobileNav.css'
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../Homepage'
+import { AuthContext } from '../App'
 
-function MobileNav() {
+function MobileNav({logout}) {
     const {isLoggedIn} = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
     const handleLogout = (e) => {
         e.preventDefault()
         localStorage.removeItem('userData')
-        navigate('/login')
+        logout(false)
+        navigate('/signin')
     }
 
     return (

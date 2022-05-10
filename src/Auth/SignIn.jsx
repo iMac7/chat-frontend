@@ -1,23 +1,22 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {Link, Navigate, useNavigate} from 'react-router-dom'
-import { AuthContext } from '../Homepage'
+import {Link, useNavigate} from 'react-router-dom'
+import { AuthContext } from '../App'
 import('./signIn.css')
 
 function SignIn(props) {
-
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const {isLoggedIn} = useContext(AuthContext)
+    const {isLoggedIn, profilepic} = useContext(AuthContext)
+    const [message, setMessage] = useState('')
 
 
     useEffect(() => {
-            if(isLoggedIn){
-                navigate('/')
-            }
+            if(isLoggedIn) navigate('/')
         }, [navigate, isLoggedIn])
 
 
+    //send details
     const handleClick =(e)=>{
         e.preventDefault()
 
@@ -36,10 +35,18 @@ function SignIn(props) {
         })
         .then(user => {
             console.log(user);
+            if(typeof user === 'string'){
+                setMessage(user)
+                setTimeout(() => {
+                    setMessage('')
+                }, 2000);
+            }
             if(user.userID){
+                props.setProfilePic(user.dp)
                 localStorage.setItem('userData',
-                 JSON.stringify({ userID: user.userID, email: user.email, token: user.token, sentAt:user.sentAt }))
-                navigate('/')
+                 JSON.stringify({ userID: user.userID, token: user.token, profilepic:user.dp}))
+                props.login(true)
+                 navigate('/')
             }
         })
     }
@@ -67,16 +74,17 @@ function SignIn(props) {
                         onChange={e=> setPassword(e.target.value)}/>
                     </div>
 
+                    <p style={{color:'red'}}>{message}</p>    
+                             
                     <div className="formElement">
                         <button className='authbtn' onClick={handleClick}>SIGN IN</button>
-                    </div>              
+                    </div> 
 
                     <div className="formElement">
                         <Link to='/signUp'>Sign Up</Link>
                         <Link to='/forgotPassword'>Forgot Password?</Link>
                     </div>
                     
-                    {console.log(isLoggedIn)}
                 </form>
             </section>
     )

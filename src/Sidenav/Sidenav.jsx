@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../Homepage'
+import { AuthContext } from '../App'
 import './sidenav.css'
 
-function Sidenav() {
+function Sidenav({logout}) {
     const {isLoggedIn} = useContext(AuthContext)
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
@@ -11,10 +11,12 @@ function Sidenav() {
         if(isOpen) setIsOpen(false)
         if(!isOpen) setIsOpen(true)
     }
+
     const handleLogout = (e) => {
         e.preventDefault()
         localStorage.removeItem('userData')
-        navigate('/signin')
+        logout(false)
+        navigate('/signIn')
     }
 
     return (
