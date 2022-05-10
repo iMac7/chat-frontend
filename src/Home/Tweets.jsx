@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
 import './tweets.css'
 import { AuthContext } from '../App'
-import { useQuery, useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
 import Replies from '../Replies/Replies'
 
 
 function Tweets() {
     const {userdata} = useContext(AuthContext)
-    const [liked, setLiked] = useState(false)
     const [open, setOpen] = useState(false)
     const [repliesIsOpen, setRepliesIsOpen] = useState(false)
     const [postID, setPostID] = useState('')
     const [message, setMessage] = useState('')
-
-    const navigate = useNavigate()
     
     
     const fetchTweets = async ({pageParam = 1}) => {

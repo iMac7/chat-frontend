@@ -46,8 +46,8 @@
 }
 
 .reply {
-    border-bottom: 1px solid gray;
     padding: 10px;
+    border-bottom: 1px solid gray;
 }
 
 .replyprofile {
@@ -131,24 +131,25 @@
     transform: scale(1.25);
 }
 
-.head-replies {
-    border: 1px solid blue;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-}
-
-.head-replies>:nth-child(1) {
-    border: 1px solid red;
-}
-
 #replies {
-    padding: 1rem;
     margin-top: 1rem;
 }
 
-.replycontent {}
+.head-replies {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sender {
+    color: gray;
+}
+
+.senderID {}
+
+.replycontent {
+    display: flex;
+    justify-content: space-between;
+}
 
 @media(max-width: 501px) {
     .postreply,

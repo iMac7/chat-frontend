@@ -1,16 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import reactdom from 'react-dom'
 import { useQuery } from 'react-query'
-import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from '../App'
 import './replies.css'
 
 
 function Replies({ postID, closeModal }) {
   const { userdata } = useContext(AuthContext)
-  const navigate = useNavigate()
   const [post, setPost] = useState('')
-  const [message, setMessage] = useState('')
 
   //fetching with usequery
   const fetchData = async () => {
@@ -73,7 +70,17 @@ function Replies({ postID, closeModal }) {
       })
 
   }
-
+  
+  //delete the main post
+  const handlePostDelete = async (id) => {
+await fetch(`http://localhost:3001/publicPost/${id}/delete`, {
+  method: 'DELETE',
+  headers: {
+    'authorization': JSON.stringify(userdata),
+  }
+})
+closeModal()
+}
   //delete a reply
   const handleDelete = async (replyID)=>{
     fetch(`http://localhost:3001/publicPost/${postID}/replies/${replyID}`,{
@@ -83,18 +90,6 @@ function Replies({ postID, closeModal }) {
         }})
 
   }
-
-      //delete the main post
-  const handlePostDelete = async (id) => {
-    await fetch(`http://localhost:3001/publicPost/${id}/delete`, {
-      method: 'DELETE',
-      headers: {
-        'authorization': JSON.stringify(userdata),
-      }
-    })
-    closeModal()
-  }
-
 
 
   const reply =
@@ -162,21 +157,23 @@ function Replies({ postID, closeModal }) {
             <div className="reply" key={reply._id}>
               <div className="head-replies">
 
-                <p className="senderID replysender">{reply.senderName}</p>
-                <p className="senderID">
+                <div className="senderID" id='sender'>{reply.senderName}</div>
+                <div className="senderID" id='sender'>
                   {reply.sendTime}
-                </p>
-                {userdata.userID === reply.sender &&
+                </div>
+
+              </div>
+
+              <div className='replycontent'>
+                 <div>{reply.content}</div>
+
+                 {userdata.userID === reply.sender &&
                 <div className="postIcon">
                   <svg onClick={()=>handleDelete(reply._id)}
                   className='postsvg postsvg_delete' width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"></path></svg> 
                 </div>
                 }
 
-              </div>
-
-              <div className='replycontent'>
-                 {reply.content} 
               </div>
             </div>
           )}
