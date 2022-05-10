@@ -65,7 +65,7 @@ function TweetArea() {
         isLoggedIn &&
          <div className="tweetBox">
               <div className="leftTweetNav">
-                {profilePic !==null && <img src={`http://localhost:3001/${profilePic}`} className='dp'/>}
+                {!!profilePic === true && <img src={`http://localhost:3001/${profilePic}`} className='dp' alt=''/>}
               </div>
 
               <div className="rightTweetNav">
