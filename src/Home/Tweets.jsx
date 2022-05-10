@@ -37,25 +37,12 @@ function Tweets() {
         fetchTweets, 
         {
             getNextPageParam: (lastPage, pages) => {
-<<<<<<< HEAD
                 if(lastPage.length<10) return
                 else{return pages.length + 1}
             },
             refetchOnWindowFocus: false,
             refetchInterval: 10000,
             cacheTime: 1000*60*2,            
-=======
-                // if(pages.length < 3){
-                //     return pages.length + 1
-                // }else{
-                //     return undefined
-                // }
-                return pages.length + 1
-            },
-            refetchOnWindowFocus: false,
-            refetchInterval: 10000,
-            
->>>>>>> 0ab5e20ed5d3b684ce277a9253046c44230abe0d
         }
         )
 
@@ -127,22 +114,6 @@ function Tweets() {
 
         {isError && <h2>{error.message}</h2>}
 
-<<<<<<< HEAD
-=======
-        {/* {console.log(posts)} */}
-        
-        {/* <button
-            onClick={() => fetchPreviousPage()}
-            disabled={!hasPreviousPage || isFetchingPreviousPage}
-        >
-            {isFetchingPreviousPage
-            ? 'Loading more...'
-            : hasPreviousPage
-            ? 'Load Older'
-            : 'Nothing more to load'}
-        </button> */}
-
->>>>>>> 0ab5e20ed5d3b684ce277a9253046c44230abe0d
         {!isLoading && data !==[] && data &&
             data.pages.map((group , i) =>{
                return   (
@@ -201,19 +172,7 @@ function Tweets() {
             
                     </div>
 
-<<<<<<< HEAD
                 </section>
-=======
-                    <div className="postIcon">
-                        <svg className='postsvg postsvg_replies' width="32px" height="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" color="#000000"><path fillRule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12H9.06l-2.573 2.573A1.457 1.457 0 014 13.543V12H2.75A1.75 1.75 0 011 10.25v-7.5z"></path></svg>
-                        <div className='iconCount'>999</div>
-                    </div>
-        
-                </div>
-                
-                
-            </section>
->>>>>>> 0ab5e20ed5d3b684ce277a9253046c44230abe0d
             )}
                       
         </React.Fragment>
@@ -222,12 +181,6 @@ function Tweets() {
         )
         }
         
-<<<<<<< HEAD
-=======
-        {/* <button disabled={!hasNextPage || isFetchingNextPage} onClick={fetchNextPage}
-        >Load more</button> */}
-        {/* {console.log(hasNextPage)} */}
->>>>>>> 0ab5e20ed5d3b684ce277a9253046c44230abe0d
         <h2>{isFetching && !isFetchingNextPage? 'loading...' : null}</h2>
 
         {/*verified svg
