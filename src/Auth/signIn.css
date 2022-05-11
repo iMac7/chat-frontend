@@ -49,6 +49,18 @@ div h2 {
     border: 2px solid lightblue;
 }
 
+.password {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.password svg {
+    position: absolute;
+    z-index: 2;
+    right: 0.5rem;
+}
+
 .authbtn {
     width: 6rem;
     height: 2rem;
