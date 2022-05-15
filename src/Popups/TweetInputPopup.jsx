@@ -17,17 +17,17 @@ function TweetInputPopup({open, closeModal}) {
             stiffness: 500,
         },
         exit: {
-            y:'100vh',
-            // opacity:0,
+            y:'-100vh',
         },
     }
 
 
-    const tweetarea = open &&
+    const tweetarea = 
 
     <AnimatePresence
     exitBeforeEnter={true} 
     >
+        {open &&
         <motion.div className='tweetInputPopupContainer'
         key="TweetInputPopup"
         variants={popupVariants}
@@ -39,7 +39,7 @@ function TweetInputPopup({open, closeModal}) {
                 <button className='close' onClick={closeModal}>X</button>       
                 <TweetArea/>
             </div>
-        </motion.div>
+        </motion.div>}
 
     </AnimatePresence>
     return reactdom.createPortal(tweetarea, document.querySelector('#input'))

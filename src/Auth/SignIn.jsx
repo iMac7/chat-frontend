@@ -35,7 +35,6 @@ function SignIn(props) {
             return res.json()
         })
         .then(user => {
-            console.log(user);
             if(typeof user === 'string'){
                 setMessage(user)
                 setTimeout(() => {

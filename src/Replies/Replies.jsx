@@ -94,35 +94,25 @@ closeModal()
 
   const popupVariants = {
     hidden: {
-        y:'100vh',
-        opacity: 0
+      opacity:0,
     },
     visible: {
-        y: 0,
-        opacity: 1,
-        duration: 0.1,
-        type: 'spring',
-        damping: 25,
-        stiffness: 500,
+    opacity:1,   
     },
     exit: {
-        y:'-100vh',
-        opacity:0
+      opacity:0,
     }
 }
 
 
-
   const reply =
     !isLoading &&
-    // <AnimatePresence exitBeforeEnter={true}>
-    // <motion.div className='replyContainer'
-    //   variants={popupVariants}
-    //   initial= "hidden"
-    //   animate= "visible"
-    //   exit={{y:-1000}}
-    // >
-      <div className='replyContainer'>
+    <motion.div className='replyContainer'
+      variants={popupVariants}
+      initial= "hidden"
+      animate= "visible"
+      exit="exit"
+    >
         
         <section key={data._id} className='postreply'>
           <button className='close' onClick={closeModal}>X</button>
@@ -209,8 +199,7 @@ closeModal()
           </div>
 
         </div>
-      </div>
-    // </motion.div>
+     </motion.div>
     // </AnimatePresence>
 
   return reactdom.createPortal(reply, document.querySelector('#reply'))

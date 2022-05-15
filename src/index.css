@@ -13,3 +13,8 @@ input {
 input:focus {
     outline: none;
 }
+
+#root {
+    background: lightgray;
+    background: linear-gradient(to bottom right, white, gray, rgb(46, 46, 46), white);
+}

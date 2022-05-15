@@ -125,6 +125,7 @@ p.time {
 .tweetFile {
     height: 20rem;
     width: 100%;
+    margin-top: 1rem;
 }
 
 .iconCount {
@@ -132,11 +133,12 @@ p.time {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-/* .pageEnd {
-    background-color: rgb(44, 44, 44);
-} */
-
 #replies {
     right: 0;
+}
+
+@media (max-width:450px) {
+    .postIcons {
+        padding-left: 3rem;
+    }
 }

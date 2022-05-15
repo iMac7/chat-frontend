@@ -26,7 +26,6 @@ function Profile(props) {
              })
              .then(res => res.json())
              .then(user => {
-                 console.log(user)
                  setUser(user)
                  props.setProfilePic(user.profileURL)
              })            

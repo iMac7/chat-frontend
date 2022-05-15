@@ -7,17 +7,11 @@ import StickyHomeNav from './StickyHomeNav'
 import './home.css'
 import { AuthContext } from '../App'
 import TweetInputPopup from '../Popups/TweetInputPopup'
-import { AnimatePresence, motion} from 'framer-motion'
 
 function Home() {
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
     const {isLoggedIn} = useContext(AuthContext)
-    // const [presence, setpresence] = useState(true)
-    // setTimeout(() => {
-    //     setpresence(false)
-    // }, 4000);
-
 
     useEffect(() => {
         if(isLoggedIn===false) navigate('/signIn')
@@ -39,12 +33,6 @@ function Home() {
             <div className='bottomNav'>
                 <TweetArea/>
                 <br />
-            {/* <AnimatePresence
-            exitBeforeEnter={true} 
-            >
-                {presence && <motion.h2 exit={{y:1000}}>hi</motion.h2>} 
-            </AnimatePresence> */}
-
                 <Tweets/>
             </div>
 
