@@ -14,7 +14,7 @@ function Tweets() {
     
     
     const fetchTweets = async ({pageParam = 1}) => {
-        return fetch(`http://localhost:3001/publicposts?limit=10&page=${pageParam}`,{
+        return fetch(`http://chatbaze.site/publicposts?limit=10&page=${pageParam}`,{
             headers : {
                 'authorization' : JSON.stringify(userdata)
             }})
@@ -44,7 +44,7 @@ function Tweets() {
 
     //delete button
     const handleDelete = async (id)=>{
-        fetch(`http://localhost:3001/publicPost/${id}/delete`,{
+        fetch(`http://chatbaze.site/publicPost/${id}/delete`,{
             method:'DELETE',
             headers : {
                 'authorization' : JSON.stringify(userdata),
@@ -79,7 +79,7 @@ function Tweets() {
 
     //like button functionality
     async function handleLikeClick (id) {
-        await fetch('http://localhost:3001/likePost', {
+        await fetch('http://chatbaze.site/likePost', {
             headers:{
                 'content-type': 'application/json',
                 'authorization': JSON.stringify(userdata)
@@ -127,7 +127,7 @@ function Tweets() {
                     <div id='content'> {post.content} </div>
                     {
                         post.imageUrl && post.imageUrl !== "undefined" &&
-                        <img className='tweetFile' src={`http://localhost:3001/${post.imageUrl}`} alt="" />
+                        <img className='tweetFile' src={`http://chatbaze.site/${post.imageUrl}`} alt="" />
                     }
                     </div>
 
