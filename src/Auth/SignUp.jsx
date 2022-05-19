@@ -44,7 +44,7 @@ function SignUp() {
 
 
 
-        fetch("http://localhost:3001/signUp",{
+        fetch("http://chatbaze.site/signUp",{
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json'
