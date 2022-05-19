@@ -21,7 +21,7 @@ function SignIn(props) {
     const handleClick =(e)=>{
         e.preventDefault()
 
-        fetch("http://localhost:3001/signIn",{
+        fetch("http://chatbaze.site/signIn",{
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json',
