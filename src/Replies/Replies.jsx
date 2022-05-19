@@ -12,7 +12,7 @@ function Replies({ postID, closeModal }) {
 
   //fetching with usequery
   const fetchData = async () => {
-    return fetch(`http://localhost:3001/publicposts/${postID}/replies`, {
+    return fetch(`http://chatbaze.site/publicposts/${postID}/replies`, {
     headers: {
       authorization: JSON.stringify(userdata),
     },
@@ -34,7 +34,7 @@ function Replies({ postID, closeModal }) {
       return
     }
 
-    await fetch(`http://localhost:3001/publicposts/${postID}/replies`, {
+    await fetch(`http://chatbaze.site/publicposts/${postID}/replies`, {
       headers: {
         'Content-Type': 'application/json',
         'authorization':JSON.stringify(userdata)
@@ -56,7 +56,7 @@ function Replies({ postID, closeModal }) {
 
   //like & unlike button
   async function handleLikeClick(id) {
-    await fetch('http://localhost:3001/likePost', {
+    await fetch('http://chatbaze.site/likePost', {
       headers: {
         'content-type': 'application/json',
         'authorization': JSON.stringify(userdata)
@@ -74,7 +74,7 @@ function Replies({ postID, closeModal }) {
   
   //delete the main post
   const handlePostDelete = async (id) => {
-await fetch(`http://localhost:3001/publicPost/${id}/delete`, {
+await fetch(`http://chatbaze.site/publicPost/${id}/delete`, {
   method: 'DELETE',
   headers: {
     'authorization': JSON.stringify(userdata),
@@ -84,7 +84,7 @@ closeModal()
 }
   //delete a reply
   const handleDelete = async (replyID)=>{
-    fetch(`http://localhost:3001/publicPost/${postID}/replies/${replyID}`,{
+    fetch(`http://chatbaze.site/publicPost/${postID}/replies/${replyID}`,{
         method:'DELETE',
         headers : {
             'authorization' : JSON.stringify(userdata),
@@ -119,7 +119,7 @@ closeModal()
 
           <h1>REPLIES</h1>
           <div className="head">
-          <img src={`http://localhost:3001/${data.profileUrl}`} alt="" className='replyprofile'/>
+          <img src={`http://chatbaze.site/${data.profileUrl}`} alt="" className='replyprofile'/>
             <p className="senderID">{data?.sender}</p>
             <p className="senderID">
               {data.sendTime}
@@ -131,7 +131,7 @@ closeModal()
           <div className='replyFileContainer'>
             {
               data.imageUrl && post.imageUrl !== "undefined" &&
-              <img className='replyFile' src={`http://localhost:3001/${data.imageUrl}`} alt="" />
+              <img className='replyFile' src={`http://chatbaze.site/${data.imageUrl}`} alt="" />
             }
           </div>
 
