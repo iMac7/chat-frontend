@@ -21,7 +21,7 @@ function SignIn(props) {
     const handleClick =(e)=>{
         e.preventDefault()
 
-        fetch("http://chatbaze.site/signIn",{
+        fetch("https://chatbaze.site/signIn",{
             method: 'POST',
             headers : {
             'Content-Type' : 'application/json',

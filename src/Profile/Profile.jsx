@@ -19,7 +19,7 @@ function Profile(props) {
 
     const fetchdata = useCallback(
       () => {         
-             fetch(`http://chatbaze.site/profile/${userID}`,{
+             fetch(`https://chatbaze.site/profile/${userID}`,{
                  headers : {
                      'authorization' : JSON.stringify(userdata)
                  }
@@ -152,7 +152,7 @@ function Profile(props) {
             <div className="bottomContainer">
 
                 <div className="bottomContainer1">                    
-                    {user.profileURL && <img src={`http://chatbaze.site/${user.profileURL}`} alt="" className="profilePic"/>}
+                    {user.profileURL && <img src={`https://chatbaze.site/${user.profileURL}`} alt="" className="profilePic"/>}
                     <button className='profilebtn'
                     onClick={handleClick}>
                         <strong>Update Profile</strong>

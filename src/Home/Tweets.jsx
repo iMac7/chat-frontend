@@ -14,7 +14,7 @@ function Tweets() {
     
     
     const fetchTweets = async ({pageParam = 1}) => {
-        return fetch(`http://chatbaze.site/publicposts?limit=10&page=${pageParam}`,{
+        return fetch(`https://chatbaze.site/publicposts?limit=10&page=${pageParam}`,{
             headers : {
                 'authorization' : JSON.stringify(userdata)
             }})
@@ -44,7 +44,7 @@ function Tweets() {
 
     //delete button
     const handleDelete = async (id)=>{
-        fetch(`http://chatbaze.site/publicPost/${id}/delete`,{
+        fetch(`https://chatbaze.site/publicPost/${id}/delete`,{
             method:'DELETE',
             headers : {
                 'authorization' : JSON.stringify(userdata),
@@ -79,7 +79,7 @@ function Tweets() {
 
     //like button functionality
     async function handleLikeClick (id) {
-        await fetch('http://chatbaze.site/likePost', {
+        await fetch('https://chatbaze.site/likePost', {
             headers:{
                 'content-type': 'application/json',
                 'authorization': JSON.stringify(userdata)
@@ -113,7 +113,7 @@ function Tweets() {
             
             <section key={post._id} ref={setElement} className='post'>
                     <div className="head">
-                        {post.profileUrl!== null && <img src={`http://localhost:3001/${post.profileUrl}`} className='postProfile' alt='img'/>}
+                        {post.profileUrl!== null && <img src={`https://localhost:3001/${post.profileUrl}`} className='postProfile' alt='img'/>}
                         <p className="senderID">{post.sender}</p>
                         <p className="senderID time">
                             {post.sendTime}
@@ -127,7 +127,7 @@ function Tweets() {
                     <div id='content'> {post.content} </div>
                     {
                         post.imageUrl && post.imageUrl !== "undefined" &&
-                        <img className='tweetFile' src={`http://chatbaze.site/${post.imageUrl}`} alt="" />
+                        <img className='tweetFile' src={`https://chatbaze.site/${post.imageUrl}`} alt="" />
                     }
                     </div>
 
