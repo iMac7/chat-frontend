@@ -14,5 +14,6 @@ This is a chat application with:
   react portals for modals
   context api for app wide state management, context data available in app.jsx component
   
+  File uploads available but only for images at the moment. Image files are optimized by lossy compression with react-image-file-resizer before uploading.
   
-  
+  Fetch api and React query library for data fetching
