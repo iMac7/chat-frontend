@@ -92,6 +92,29 @@ closeModal()
 
   }
 
+  //convert post sendtime to date
+  function convert(time) {
+      const difference = Date.now() - time //date in ms
+      const minutes = Math.floor(difference / (1000 * 60))
+  
+      if (minutes < 60) {
+          return minutes + "m"
+      } else {
+          const hours = Math.floor(minutes / 60)
+          if (hours < 24) {
+              return hours + "h"
+          } else {
+              const days = Math.floor(hours / 24)
+              if (days < 7) {
+                  return days + "d"
+              } else {
+                  return new Date(time).toLocaleDateString().slice(0, 5)
+              }
+          }
+      }
+  }
+
+
   const popupVariants = {
     hidden: {
       opacity:0,
@@ -122,7 +145,7 @@ closeModal()
           <img src={`https://chatbaze.site/${data.profileUrl}`} alt="" className='replyprofile'/>
             <p className="senderID">{data?.sender}</p>
             <p className="senderID">
-              {data.sendTime}
+              {convert(data.time)}
             </p>
           </div>
 
@@ -178,7 +201,7 @@ closeModal()
 
                   <div className="senderID" id='sender'>{reply.senderName}</div>
                   <div className="senderID" id='sender'>
-                    {reply.sendTime}
+                    {convert(reply.time)}
                   </div>
 
                 </div>

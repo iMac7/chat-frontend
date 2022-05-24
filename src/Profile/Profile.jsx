@@ -67,7 +67,7 @@ function Profile(props) {
         }
 
         try {
-            await fetch(`http://chatbaze.site/profile/${userID}/update`,{
+            await fetch(`https://chatbaze.site/profile/${userID}/update`,{
                 method: 'POST',
                 headers : {
                     'authorization' : JSON.stringify(userdata),
@@ -111,7 +111,7 @@ function Profile(props) {
             const formdata = new FormData()
             formdata.append('image',image)
             try {
-                await fetch(`http://chatbaze.site/profilepic/${userID}/update`,{
+                await fetch(`https://chatbaze.site/profilepic/${userID}/update`,{
                     method: 'POST',
                     headers : {
                         'authorization' : JSON.stringify(userdata),

@@ -94,6 +94,28 @@ function Tweets() {
         })        
     }
 
+    //convert post sendtime to date
+    function convert(time) {
+        const difference = Date.now() - time //date in ms
+        const minutes = Math.floor(difference / (1000 * 60))
+    
+        if (minutes < 60) {
+            return minutes + "m"
+        } else {
+            const hours = Math.floor(minutes / 60)
+            if (hours < 24) {
+                return hours + "h"
+            } else {
+                const days = Math.floor(hours / 24)
+                if (days < 7) {
+                    return days + "d"
+                } else {
+                    return new Date(time).toLocaleDateString().slice(0, 5)
+                }
+            }
+        }
+    }
+    
 
     return (
         <>
@@ -113,10 +135,10 @@ function Tweets() {
             
             <section key={post._id} ref={setElement} className='post'>
                     <div className="head">
-                        {post.profileUrl!== null && <img src={`https://localhost:3001/${post.profileUrl}`} className='postProfile' alt='img'/>}
+                        {post.profileUrl!== null && <img src={`https://chatbaze.site/${post.profileUrl}`} className='postProfile' alt='img'/>}
                         <p className="senderID">{post.sender}</p>
                         <p className="senderID time">
-                            {post.sendTime}
+                            {convert(post.time)}
                         </p>
                     </div>
 
@@ -161,7 +183,7 @@ function Tweets() {
             
                     </div>
 
-                </section>
+            </section>
             )}
                       
         </React.Fragment>
@@ -170,7 +192,6 @@ function Tweets() {
         )
         }
         
-        <h2>{isFetching && !isFetchingNextPage? 'loading...' : null}</h2>
         
         {
             <AnimatePresence exitBeforeEnter={true}>

@@ -79,6 +79,7 @@ function TweetArea() {
 
                   <ImgUpload id='image' childImage={setImage} />
 
+                  <p style={{color:"blue"}}>{message}</p>
                   <button id='tweetBtn' onClick={handleClick} 
                   disabled={isLoading? true: false}
                   >
@@ -90,7 +91,6 @@ function TweetArea() {
                   </button>
 
                 </div>
-                    <p style={{color:"blue"}}>{message}</p>
             </div>
          </div>
     )

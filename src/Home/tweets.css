@@ -4,7 +4,7 @@
 }
 
 .tweets::-webkit-scrollbar-track {
-    background: white;
+    background: black;
     border-radius: 100vw;
     margin-block: .4rem;
 }
@@ -97,7 +97,8 @@ p.time {
     transition: 300ms;
 }
 
-.postsvg_like:hover {
+
+/* .postsvg_like:hover {
     fill: red;
     transform: scale(1.4);
 }
@@ -105,7 +106,7 @@ p.time {
 .postsvg_replies:hover {
     fill: rgb(46, 46, 46);
     transform: scale(1.4);
-}
+} */
 
 .postsvg_delete {
     border-radius: 50%;
@@ -113,10 +114,11 @@ p.time {
     height: 1.8rem;
 }
 
-.postsvg_delete:hover {
+
+/* .postsvg_delete:hover {
     background: rgb(43, 43, 43);
     fill: white;
-}
+} */
 
 .postsvg:active {
     transform: scale(2);
