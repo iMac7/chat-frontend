@@ -35,7 +35,7 @@ function TweetArea() {
 
     setIsLoading(true)
 
-    await fetch("https://chatbaze.site/publicPost",{
+    await fetch("http://localhost:3001/publicPost",{
         headers:{
           authorization: JSON.stringify(userdata)
         },
@@ -65,7 +65,7 @@ function TweetArea() {
         isLoggedIn &&
          <div className="tweetBox">
               <div className="leftTweetNav">
-                {!!profilePic === true && <img src={`https://chatbaze.site/${profilePic}`} className='dp' alt=''/>}
+                {!!profilePic === true && <img src={`http://localhost:3001/${profilePic}`} className='dp' alt=''/>}
               </div>
 
               <div className="rightTweetNav">

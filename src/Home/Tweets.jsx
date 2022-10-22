@@ -14,7 +14,7 @@ function Tweets() {
     
     
     const fetchTweets = async ({pageParam = 1}) => {
-        return fetch(`https://chatbaze.site/publicposts?limit=10&page=${pageParam}`,{
+        return fetch(`http://localhost:3001/publicposts?limit=10&page=${pageParam}`,{
             headers : {
                 'authorization' : JSON.stringify(userdata)
             }})
@@ -37,14 +37,14 @@ function Tweets() {
                 else{return pages.length + 1}
             },
             refetchOnWindowFocus: false,
-            refetchInterval: 10000,
+            refetchInterval: 1000,
             cacheTime: 1000*60*2,            
         }
         )
 
     //delete button
     const handleDelete = async (id)=>{
-        fetch(`https://chatbaze.site/publicPost/${id}/delete`,{
+        fetch(`http://localhost:3001/publicPost/${id}/delete`,{
             method:'DELETE',
             headers : {
                 'authorization' : JSON.stringify(userdata),
@@ -79,7 +79,7 @@ function Tweets() {
 
     //like button functionality
     async function handleLikeClick (id) {
-        await fetch('https://chatbaze.site/likePost', {
+        await fetch('http://localhost:3001/likePost', {
             headers:{
                 'content-type': 'application/json',
                 'authorization': JSON.stringify(userdata)
@@ -114,7 +114,7 @@ function Tweets() {
                 }
             }
         }
-    }
+      }
     
 
     return (
@@ -135,7 +135,7 @@ function Tweets() {
             
             <section key={post._id} ref={setElement} className='post'>
                     <div className="head">
-                        {post.profileUrl!== null && <img src={`https://chatbaze.site/${post.profileUrl}`} className='postProfile' alt='img'/>}
+                        {post.profileUrl!== null && <img src={`http://localhost:3001/${post.profileUrl}`} className='postProfile' alt='img'/>}
                         <p className="senderID">{post.sender}</p>
                         <p className="senderID time">
                             {convert(post.time)}
@@ -149,7 +149,7 @@ function Tweets() {
                     <div id='content'> {post.content} </div>
                     {
                         post.imageUrl && post.imageUrl !== "undefined" &&
-                        <img className='tweetFile' src={`https://chatbaze.site/${post.imageUrl}`} alt="" />
+                        <img className='tweetFile' src={`http://localhost:3001/${post.imageUrl}`} alt="" />
                     }
                     </div>
 
